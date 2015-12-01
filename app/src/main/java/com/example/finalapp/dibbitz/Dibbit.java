@@ -10,8 +10,8 @@ import java.util.UUID;
 /**
  * Created by user on 10/6/15.
  */
-@ParseClassName("Dibbit")
-public class Dibbit  extends ParseObject{
+//@ParseClassName("Dibbit")
+public class Dibbit{
     private UUID mId;
     private String mTitle;
     private Date mDate;
@@ -34,7 +34,7 @@ public class Dibbit  extends ParseObject{
 
 
     public String getTitle() {
-        return getString(mTitle);
+        return mTitle;
     }
 
     public void setTitle(String title) {
