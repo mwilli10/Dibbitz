@@ -21,6 +21,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import java.io.File;
@@ -41,6 +42,9 @@ public class DibbitFragment extends Fragment {
     private static final int REQUEST_TIME = 1;
     private static final int REQUEST_PHOTO = 2;
 
+    private static final double STEP_SIZE = 0.5;
+    private static final int NUM_STARS = 5;
+
     private Dibbit mDibbit;
     private EditText mTitleField;
     private Button mDateButton;
@@ -49,6 +53,9 @@ public class DibbitFragment extends Fragment {
     private ImageView mPhotoView;
     private ImageButton mPhotoButton;
     private File mPhotoFile;
+    private RatingBar mRatingBar;
+    private EditText mDescriptionField;
+
 
 
     public static DibbitFragment newInstance(UUID dibbitId) {
@@ -125,6 +132,38 @@ public class DibbitFragment extends Fragment {
             }
         });
 
+        mRatingBar = (RatingBar) v.findViewById(R.id.dibbit_difficulty_ratingBar);
+        mRatingBar.setStepSize((float)STEP_SIZE);
+        mRatingBar.setNumStars(NUM_STARS);
+        updateDifficulty();
+        mRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                mDibbit.setDifficulty((double) rating);
+            }
+        });
+
+        mDescriptionField = (EditText) v.findViewById(R.id.dibbit_description);
+        mDescriptionField.setText(mDibbit.getDescription());
+        //mDibbit.setDescription(mDibbit.getDescription());
+        mDescriptionField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //Nothing here
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mDibbit.setDescription(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+               // mDibbit.setDescription(s.toString());
+            }
+        });
+
+
         PackageManager packageManager = getActivity().getPackageManager();
 
         mPhotoButton = (ImageButton) v.findViewById(R.id.dibbit_camera);
@@ -195,6 +234,10 @@ public class DibbitFragment extends Fragment {
 
     private void updateTime() {
         mTimeButton.setText(android.text.format.DateFormat.format("hh:mm a", mDibbit.getDate()));
+    }
+
+    private void updateDifficulty() {
+        mRatingBar.setRating((float)mDibbit.getDifficulty());
     }
 
     private void updatePhotoView(){

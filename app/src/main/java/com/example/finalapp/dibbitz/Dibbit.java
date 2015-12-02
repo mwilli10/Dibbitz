@@ -13,10 +13,14 @@ import java.util.UUID;
 @ParseClassName("Dibbit")
 public class Dibbit extends ParseObject{
     private UUID mId;
+
+    // Don't actually need these anymore, but it's dope to see what's there
     private String mTitle;
     private Date mDate;
     private Date mTime;
     private boolean mIsDone;
+    private double mDifficulty;
+    private String mDescription;
 
 
     public Dibbit() {
@@ -33,6 +37,21 @@ public class Dibbit extends ParseObject{
         return mId;
     }
 
+    public String getDescription() {
+        return getString("mDescription");
+    }
+
+    public void setDescription(String description) {
+        put("mDescription",description);
+    }
+
+    public double getDifficulty() {
+        return getDouble("mDifficulty");
+    }
+
+    public void setDifficulty(double difficulty) {
+        put("mDifficulty", difficulty);
+    }
 
     public String getTitle() {
         return getString("mTitle");
@@ -50,11 +69,6 @@ public class Dibbit extends ParseObject{
     public void setDate(Date date) {
         put("mDate",date);
         saveInBackground();
-    }
-
-
-    public String getDateString() {
-        return DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(mDate);
     }
 
     public Date getTime() {
@@ -82,6 +96,11 @@ public class Dibbit extends ParseObject{
         return "IMG"+ getId().toString()+".jpg";
 
     }
+
+       /* public String getDateString() {
+        return DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(mDate);
+    }*/
+
 
 
 }
