@@ -11,7 +11,7 @@ import java.util.UUID;
  * Created by user on 10/6/15.
  */
 //@ParseClassName("Dibbit")
-public class Dibbit{
+public class Dibbit {
     private UUID mId;
     private String mTitle;
     private Date mDate;
@@ -19,13 +19,14 @@ public class Dibbit{
     private boolean mIsDone;
 
 
-    public Dibbit(){
+    public Dibbit() {
         //Constructor makes Dibbit with random ID and empty date
         mId = UUID.randomUUID();
         mDate = new Date();
         mTime = new Date();
     }
-//    public void setId(UUID uuid){
+
+    //    public void setId(UUID uuid){
 //        put("mId",uuid.toString());
 //    }
     public UUID getId() {
@@ -54,10 +55,14 @@ public class Dibbit{
         return DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(mDate);
     }
 
-    public Date getTime() { return mTime;}
+    public Date getTime() {
+        return mTime;
+    }
 
 
-    public void setTime(Date time) {mTime = time;}
+    public void setTime(Date time) {
+        mTime = time;
+    }
 
 
     public boolean isDone() {
@@ -67,4 +72,12 @@ public class Dibbit{
     public void setDone(boolean isDone) {
         mIsDone = isDone;
     }
+
+
+    public String getPhotoFileName() {
+        return "IMG"+ getId().toString()+".jpg";
+
+    }
+
+
 }

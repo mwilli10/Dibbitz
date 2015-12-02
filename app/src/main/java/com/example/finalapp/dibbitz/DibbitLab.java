@@ -1,7 +1,9 @@
 package com.example.finalapp.dibbitz;
 
 import android.content.Context;
+import android.os.Environment;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -11,10 +13,12 @@ import java.util.UUID;
  */
 public class DibbitLab {
     private static DibbitLab sDibbitLab;
+    private Context mContext;
 
     private List<Dibbit> mDibbits;
 
     private DibbitLab(Context context) {
+        mContext = context;
         mDibbits = new ArrayList<>();
 //        for(int i = 0; i < 100; i++) {
 //            Dibbit dibbit = new Dibbit();
@@ -51,5 +55,16 @@ public class DibbitLab {
     public void deleteDibbit(Dibbit c){
         mDibbits.remove(c);
     }
+
+
+    public File getPhotoFile(Dibbit dibbit){
+
+        File externalFilesDir = mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        if (externalFilesDir ==null){
+            return null;
+        }
+        return new File(externalFilesDir, dibbit.getPhotoFileName());
+    }
+
 }
 
