@@ -4,19 +4,57 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+    <!--<include layout="@layout/view_camera_and_title"/>-->
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/dibbit_title_label"
-        style="?android:listSeparatorTextViewStyle"/>
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="horizontal">-->
 
-    <EditText android:id="@+id/dibbit_title"
-        android:hint="@string/dibbit_title_hint"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="4dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dibbit_photo"
+                    android:scaleType="centerInside"
+                    android:background="@android:color/darker_gray"
+                    android:cropToPadding="true"/>
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dibbit_camera"
+                    android:src="@android:drawable/ic_menu_camera"/>
+            </LinearLayout>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/dibbit_title_label"
+                style="?android:listSeparatorTextViewStyle"/>
+
+        <EditText android:id="@+id/dibbit_title"
+                android:hint="@string/dibbit_title_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
+    </LinearLayout>
+
+
+    <!--</LinearLayout>-->
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
