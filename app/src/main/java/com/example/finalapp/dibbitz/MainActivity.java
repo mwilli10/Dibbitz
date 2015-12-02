@@ -12,6 +12,8 @@ import android.widget.HorizontalScrollView;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
+import com.parse.Parse;
+import com.parse.ParseObject;
 
 import java.util.List;
 import java.util.Vector;
@@ -49,6 +51,12 @@ public class MainActivity extends AppCompatActivity implements
 		setContentView(R.layout.activity_main);
 		fragmentManager = getSupportFragmentManager();
 		i++;
+
+		// Enable Local Datastore.
+		Parse.enableLocalDatastore(this);
+
+		Parse.initialize(this, "jNMKS9zcvkVoRIcGxCUX7ANncRFlhK9VhD0sBhcr", "hGutVVJezPf9aSz1r7Qtz7UlPjzuWZR8mQeS4R3x");
+		ParseObject.registerSubclass(Dibbit.class);
 
 		// init tabhost
 		this.initializeTabHost(savedInstanceState);

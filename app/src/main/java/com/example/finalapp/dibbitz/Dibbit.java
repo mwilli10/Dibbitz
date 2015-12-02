@@ -10,8 +10,8 @@ import java.util.UUID;
 /**
  * Created by user on 10/6/15.
  */
-//@ParseClassName("Dibbit")
-public class Dibbit {
+@ParseClassName("Dibbit")
+public class Dibbit extends ParseObject{
     private UUID mId;
     private String mTitle;
     private Date mDate;
@@ -22,32 +22,34 @@ public class Dibbit {
     public Dibbit() {
         //Constructor makes Dibbit with random ID and empty date
         mId = UUID.randomUUID();
-        mDate = new Date();
-        mTime = new Date();
+        setDate(new Date());
+        saveInBackground();
+        //mTime = new Date();
     }
 
-    //    public void setId(UUID uuid){
-//        put("mId",uuid.toString());
-//    }
+    //There's no need to save the UUId because Parse makes it's own IDs
+    //Pretty fuckin clutch
     public UUID getId() {
         return mId;
     }
 
 
     public String getTitle() {
-        return mTitle;
+        return getString("mTitle");
     }
 
     public void setTitle(String title) {
-        mTitle = title;
+        put("mTitle",title);
+        saveInBackground();
     }
 
     public Date getDate() {
-        return mDate;
+        return getDate("mDate");
     }
 
     public void setDate(Date date) {
-        mDate = date;
+        put("mDate",date);
+        saveInBackground();
     }
 
 
@@ -56,21 +58,23 @@ public class Dibbit {
     }
 
     public Date getTime() {
-        return mTime;
+        return getDate("mTime");
     }
 
 
     public void setTime(Date time) {
-        mTime = time;
+        put("mTime", time);
+        saveInBackground();
     }
 
 
     public boolean isDone() {
-        return mIsDone;
+        return getBoolean("mIsDone");
     }
 
     public void setDone(boolean isDone) {
-        mIsDone = isDone;
+        put("mIsDone",isDone);
+        saveInBackground();
     }
 
 
