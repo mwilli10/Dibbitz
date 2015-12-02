@@ -44,7 +44,8 @@
         android:layout_height="30dp"
         android:layout_below ="@id/list_item_dibbit_done_check_box"
         android:layout_toRightOf="@id/list_item_dibbit_date_text_view"
-        android:src="@drawable/bell"/>
+        android:src="@drawable/bell"
+        android:background="@color/dull_light_blue"/>
 
 
 

@@ -23,19 +23,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="4dp">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/dibbit_photo"
-                    android:scaleType="centerInside"
-                    android:background="@android:color/darker_gray"
-                    android:cropToPadding="true"/>
 
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/dibbit_camera"
-                    android:src="@android:drawable/ic_menu_camera"/>
+
+
             </LinearLayout>
 
         <TextView
@@ -113,6 +103,40 @@
             android:id="@+id/dibbit_difficulty_ratingBar"/>
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dibbit_camera"
+            android:src="@android:drawable/ic_menu_camera"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="Pic Button"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dibbit_photo_label"
+            android:text="Add Photo?"
+            android:paddingRight="10dp"
+            android:layout_below="@id/dibbit_camera"/>
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:id="@+id/dibbit_photo"
+            android:scaleType="centerInside"
+            android:background="@android:color/transparent"
+            android:cropToPadding="true"
+            android:layout_toRightOf="@id/dibbit_photo_label"
+            android:contentDescription="Relevant Pic"/>
+    </RelativeLayout>
 
     <CheckBox android:id="@+id/dibbit_done"
               android:layout_width="match_parent"
