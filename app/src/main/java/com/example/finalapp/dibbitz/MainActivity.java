@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements
 
 		fragments.add(new DibbitListFragment());
 		fragments.add(new MapActivity());
-		fragments.add(new MapActivity());
+		fragments.add(new CalendarActivity());
 
 
 		this.myViewPagerAdapter = new MyFragmentPagerAdapter(

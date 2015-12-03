@@ -6,8 +6,9 @@
     <color name="green">#8FCC85</color>
     <color name="blue">#ff33b5e5</color>
     <color name="white">#ffffff</color>
-
-
+    <color name="gray">#d3d3d3</color>
     <color name="dull_light_blue">#381ac0ff</color>
+
+
 
 </resources>
