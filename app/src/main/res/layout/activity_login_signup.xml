@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/dull_light_blue"
+              android:weightSum="1">
+
+    <TextView
+        android:layout_width="149dp"
+        android:layout_height="wrap_content"
+        android:text="Log In"
+        android:id="@+id/textView"
+        android:layout_weight="0.14"
+        android:textSize="40sp"
+        android:textColor="@android:color/holo_blue_light"
+        android:layout_gravity="center_horizontal"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Username"
+        android:layout_marginTop="60dp"
+        android:id="@+id/username_box"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:layout_marginTop="20dp"
+        android:id="@+id/password_box"/>
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Login"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/login_button"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New?"
+        android:textSize="20sp"/>
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Sign Up"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/signup_button"/>
+
+
+</LinearLayout>

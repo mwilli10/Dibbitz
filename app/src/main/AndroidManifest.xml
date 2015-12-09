@@ -54,6 +54,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".LoginSignupActivity" >
+        </activity>
         <activity
             android:name=".DibbitPagerActivity"
             android:label="@string/app_name"

@@ -1,6 +1,7 @@
 package com.example.finalapp.dibbitz;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,8 +13,14 @@ import android.widget.HorizontalScrollView;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
+import android.widget.Toast;
+
 import com.parse.Parse;
+import com.parse.ParseAnonymousUtils;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 import java.util.List;
 import java.util.Vector;
@@ -58,11 +65,34 @@ public class MainActivity extends AppCompatActivity implements
 		Parse.initialize(this, "jNMKS9zcvkVoRIcGxCUX7ANncRFlhK9VhD0sBhcr", "hGutVVJezPf9aSz1r7Qtz7UlPjzuWZR8mQeS4R3x");
 		ParseObject.registerSubclass(Dibbit.class);
 
-		// init tabhost
-		this.initializeTabHost(savedInstanceState);
+		// Get current user data from Parse.com
+		ParseUser currentUser = ParseUser.getCurrentUser();
+		if (currentUser != null) {
 
-		// init ViewPager
-		this.initializeViewPager();
+			// Send logged in users to Welcome.class
+//			Intent intent = new Intent(MainActivity.this, LoginSignupActivity.class);
+//			startActivity(intent);
+			//Toast.makeText(getApplicationContext(), "Find a way to start the app now" , Toast.LENGTH_LONG).show();
+
+			// init tabhost
+			this.initializeTabHost(savedInstanceState);
+			// init ViewPager
+			this.initializeViewPager();
+
+			finish();
+		} else {
+			// Send user to LoginSignupActivity.class
+			Intent intent = new Intent(MainActivity.this, LoginSignupActivity.class);
+			startActivity(intent);
+			finish();
+		}
+
+		Intent intent = new Intent(MainActivity.this, LoginSignupActivity.class);
+		startActivity(intent);
+
+
+
+
 
 
 	}
@@ -99,6 +129,8 @@ public class MainActivity extends AppCompatActivity implements
 			tabHost.addTab(tabSpec);
 		}
 		tabHost.setOnTabChangedListener(this);
+
+
 	}
 
 	@Override

@@ -56,7 +56,6 @@ public class DibbitLab {
         mDibbits.remove(c);
     }
 
-
     public File getPhotoFile(Dibbit dibbit){
 
         File externalFilesDir = mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
