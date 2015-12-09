@@ -2,6 +2,7 @@ package com.example.finalapp.dibbitz;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -21,14 +22,16 @@ public class Dibbit extends ParseObject{
     private boolean mIsDone;
     private double mDifficulty;
     private String mDescription;
+    private ParseUser mUser;
 
 
     public Dibbit() {
         //Constructor makes Dibbit with random ID and empty date
         mId = UUID.randomUUID();
         setDate(new Date());
+        put("mUser",ParseUser.getCurrentUser());
         saveInBackground();
-        //mTime = new Date();
+
     }
 
     //There's no need to save the UUId because Parse makes it's own IDs
