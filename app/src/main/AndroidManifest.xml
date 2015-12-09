@@ -48,6 +48,9 @@
         <activity android:name=".DibbitListActivity"
             android:label="@string/app_name">
         </activity>
+        <activity android:name=".MainActivity"
+                  android:label="@string/app_name">
+        </activity>
         <activity android:name=".LoginSignUpActivity"
             android:label="@string/app_name">
             <intent-filter>
