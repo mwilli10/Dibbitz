@@ -15,7 +15,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.parse.LogInCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
@@ -33,6 +35,12 @@ public class LoginSignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // Get the view from main.xml
         setContentView(R.layout.activity_login_signup);
+
+        // Enable Local Datastore.
+        Parse.enableLocalDatastore(this);
+
+        Parse.initialize(this, "jNMKS9zcvkVoRIcGxCUX7ANncRFlhK9VhD0sBhcr", "hGutVVJezPf9aSz1r7Qtz7UlPjzuWZR8mQeS4R3x");
+        ParseObject.registerSubclass(Dibbit.class);
         // Locate EditTexts in main.xml
         username = (EditText) findViewById(R.id.username_box);
         password = (EditText) findViewById(R.id.password_box);
@@ -49,7 +57,7 @@ public class LoginSignupActivity extends AppCompatActivity {
                 // Retrieve the text entered from the EditText
                 usernametxt = username.getText().toString();
                 passwordtxt = password.getText().toString();
-                System.out.println("Login button clicked");
+
 
 
 
@@ -59,13 +67,12 @@ public class LoginSignupActivity extends AppCompatActivity {
                             System.out.println("Inside done()");
                             if ((e== null) &( user != null)) {
                                 // Valid user... Let them in the app
-                                System.out.println("Let them in the app");
+                                startActivity(new Intent(LoginSignupActivity.this, MainActivity.class));
                                 Toast.makeText(getApplicationContext(),
-                                        ("Welcome back" + usernametxt),
+                                        ("Welcome back " + usernametxt),
                                         Toast.LENGTH_SHORT).show();
                                 finish();
                             } else {
-                                System.out.println("Didn't work");
                                 Toast.makeText(getApplicationContext(), "No such user exists, please signup or try again", Toast.LENGTH_LONG).show();
                             }
                         }
@@ -80,7 +87,6 @@ public class LoginSignupActivity extends AppCompatActivity {
                 // Retrieve the text entered from the EditText
                 usernametxt = username.getText().toString();
                 passwordtxt = password.getText().toString();
-                System.out.println("Signup button clicked");
 
                 // Force user to fill up the form
                 if (usernametxt.equals("") || passwordtxt.equals("")) {
@@ -95,16 +101,12 @@ public class LoginSignupActivity extends AppCompatActivity {
                     user.setPassword(passwordtxt);
                     user.signUpInBackground(new SignUpCallback() {
                         public void done(ParseException e) {
-                            System.out.println("Inside done()");
                             if (e == null) {
-                                System.out.println("Got it!");
                                 // Show a simple Toast message upon successful registration
                                 Toast.makeText(getApplicationContext(),
                                         "Successfully Signed up, please log in.",
                                         Toast.LENGTH_LONG).show();
                             } else {
-                                System.out.println("Signup Error");
-                                System.out.println(e);
                                 Toast.makeText(getApplicationContext(),
                                         "Sign up Error", Toast.LENGTH_LONG).show();
                             }

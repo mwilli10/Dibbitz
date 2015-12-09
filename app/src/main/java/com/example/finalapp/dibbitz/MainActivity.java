@@ -59,11 +59,7 @@ public class MainActivity extends AppCompatActivity implements
 		fragmentManager = getSupportFragmentManager();
 		i++;
 
-		// Enable Local Datastore.
-		Parse.enableLocalDatastore(this);
 
-		Parse.initialize(this, "jNMKS9zcvkVoRIcGxCUX7ANncRFlhK9VhD0sBhcr", "hGutVVJezPf9aSz1r7Qtz7UlPjzuWZR8mQeS4R3x");
-		ParseObject.registerSubclass(Dibbit.class);
 
 		// Get current user data from Parse.com
 		ParseUser currentUser = ParseUser.getCurrentUser();

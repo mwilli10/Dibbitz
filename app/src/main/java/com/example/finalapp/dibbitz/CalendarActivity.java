@@ -13,7 +13,8 @@ import android.widget.ImageButton;
  * Created by Morgan on 12/2/15.
  */
 public class CalendarActivity extends Fragment {
-        private ImageButton mCalendar;
+    private ImageButton mCalendar;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,11 +22,12 @@ public class CalendarActivity extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        startActivity(new Intent(Intent.ACTION_VIEW, android.net.Uri.parse("content://com.android.calendar/time/")));
         View v = inflater.inflate(R.layout.activity_calendar, container, false);
 
         mCalendar = (ImageButton) v.findViewById(R.id.camera_img);
 
-        mCalendar.setOnClickListener(new View.OnClickListener(){
+        mCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                Intent calIntent = new Intent(Intent.ACTION_INSERT);
@@ -39,4 +41,17 @@ public class CalendarActivity extends Fragment {
         return v;
 
     }
+
+//
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        startActivity(new Intent(Intent.ACTION_VIEW, android.net.Uri.parse("content://com.android.calendar/time/")));
+//    }
+//
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//    }
 }
+
