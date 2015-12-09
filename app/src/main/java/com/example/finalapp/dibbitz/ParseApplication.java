@@ -7,6 +7,7 @@ package com.example.finalapp.dibbitz;
 import com.parse.Parse;
 import com.parse.ParseACL;
 
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import android.app.Application;
@@ -22,6 +23,7 @@ public class ParseApplication extends Application{
 
         ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();
+        ParseObject.registerSubclass(Dibbit.class);
 
         //Makes the default private
         defaultACL.setPublicReadAccess(false);

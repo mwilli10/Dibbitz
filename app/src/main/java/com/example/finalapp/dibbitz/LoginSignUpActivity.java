@@ -34,11 +34,7 @@ public class LoginSignUpActivity extends AppCompatActivity {
         // Get the view from main.xml
         setContentView(R.layout.activity_login_signup);
 
-        // Enable Local Datastore.
-        Parse.enableLocalDatastore(this);
 
-        Parse.initialize(this, "jNMKS9zcvkVoRIcGxCUX7ANncRFlhK9VhD0sBhcr", "hGutVVJezPf9aSz1r7Qtz7UlPjzuWZR8mQeS4R3x");
-        ParseObject.registerSubclass(Dibbit.class);
         // Locate EditTexts in main.xml
         username = (EditText) findViewById(R.id.username_box);
         password = (EditText) findViewById(R.id.password_box);
