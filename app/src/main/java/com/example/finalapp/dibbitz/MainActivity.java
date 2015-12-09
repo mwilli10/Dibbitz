@@ -53,9 +53,13 @@ public class MainActivity extends AppCompatActivity implements
 		fragmentManager = getSupportFragmentManager();
 		i++;
 
+		// init tabhost
+		this.initializeTabHost(savedInstanceState);
+		// init ViewPager
+		this.initializeViewPager();
 
 
-		// Get current user data from Parse.com
+		/*// Get current user data from Parse.com
 		ParseUser currentUser = ParseUser.getCurrentUser();
 		if (currentUser != null) {
 
@@ -70,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements
 			Intent intent = new Intent(MainActivity.this, LoginSignUpActivity.class);
 			startActivity(intent);
 			finish();
-		}
+		}*/
 
 
 
