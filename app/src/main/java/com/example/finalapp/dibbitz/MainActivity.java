@@ -13,14 +13,8 @@ import android.widget.HorizontalScrollView;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
-import android.widget.Toast;
 
-import com.parse.Parse;
-import com.parse.ParseAnonymousUtils;
-import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
-import com.parse.SignUpCallback;
 
 import java.util.List;
 import java.util.Vector;
@@ -66,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements
 		if (currentUser != null) {
 
 			// Send logged in users to Welcome.class
-//			Intent intent = new Intent(MainActivity.this, LoginSignupActivity.class);
+//			Intent intent = new Intent(MainActivity.this, LoginSignUpActivity.class);
 //			startActivity(intent);
 			//Toast.makeText(getApplicationContext(), "Find a way to start the app now" , Toast.LENGTH_LONG).show();
 
@@ -77,13 +71,13 @@ public class MainActivity extends AppCompatActivity implements
 
 			finish();
 		} else {
-			// Send user to LoginSignupActivity.class
-			Intent intent = new Intent(MainActivity.this, LoginSignupActivity.class);
+			// Send user to LoginSignUpActivity.class
+			Intent intent = new Intent(MainActivity.this, LoginSignUpActivity.class);
 			startActivity(intent);
 			finish();
 		}
 
-		Intent intent = new Intent(MainActivity.this, LoginSignupActivity.class);
+		Intent intent = new Intent(MainActivity.this, LoginSignUpActivity.class);
 		startActivity(intent);
 
 
