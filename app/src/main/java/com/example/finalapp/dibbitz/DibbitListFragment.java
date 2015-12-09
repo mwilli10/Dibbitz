@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,6 +17,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.List;
 
@@ -31,11 +38,11 @@ public class DibbitListFragment extends Fragment {
     private Button mAddButton;
     private int mChangedPosition;
 
+
     private static final String TAG = "DibbitListFragment";
     private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
 
     //private static final String POSITION_OF_DIBBIT = "position_of_dibbit";
-
 
 
     @Override
@@ -59,7 +66,7 @@ public class DibbitListFragment extends Fragment {
 
         updateUI();
 
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             mSubtitleVisible = savedInstanceState.getBoolean(SAVED_SUBTITLE_VISIBLE);
         }
         return view;
@@ -83,17 +90,16 @@ public class DibbitListFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_dibbit_list, menu);
         MenuItem subtitleItem = menu.findItem(R.id.menu_item_show_subtitle);
-        if (mSubtitleVisible){
+        if (mSubtitleVisible) {
             subtitleItem.setTitle(R.string.hide_subtitle);
-        }
-        else {
+        } else {
             subtitleItem.setTitle(R.string.show_subtitle);
         }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menu_item_new_dibbit:
                 addDibbit();
                 return true;
@@ -114,22 +120,31 @@ public class DibbitListFragment extends Fragment {
         int dibbitCount = dibbitLab.getDibbits().size();
 //        String subtitle = getString(R.string.subtitle_format, dibbitCount);
         String subtitle = getResources().getQuantityString(R.plurals.subtitle_plural, dibbitCount, dibbitCount);
-        if(!mSubtitleVisible){
+        if (!mSubtitleVisible) {
             subtitle = null;
         }
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.getSupportActionBar().setSubtitle(subtitle);
     }
 
+    public DibbitAdapter getAdapter() {
+        return mAdapter;
+    }
+
+
     private void updateUI() {
         DibbitLab dibbitLab = DibbitLab.get(getActivity());
+        dibbitLab.updateDibbits();
+//        if(dibbitLab.didDataSetChange()){
+//            mAdapter.notifyDataSetChanged();
+//        }
         List<Dibbit> dibbits = dibbitLab.getDibbits();
+
 
         if (mAdapter == null) {
             mAdapter = new DibbitAdapter(dibbits);
             mDibbitRecyclerView.setAdapter(mAdapter);
-        }
-        else {
+        } else {
             mAdapter.notifyItemChanged(mChangedPosition);
             mChangedPosition = RecyclerView.NO_POSITION; //Not sure
             /*if (getArguments() == null) {
@@ -139,10 +154,9 @@ public class DibbitListFragment extends Fragment {
                 mAdapter.notifyItemChanged(getArguments().getInt(POSITION_OF_DIBBIT));
             }*/
         }
-        if(dibbits.size()>0){
+        if (dibbits.size() > 0) {
             mLinearLayout.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             mLinearLayout.setVisibility(View.VISIBLE);
             mAddButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -152,7 +166,9 @@ public class DibbitListFragment extends Fragment {
             });
         }
         updateSubtitle();
+
     }
+
 
     private class DibbitHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -202,6 +218,7 @@ public class DibbitListFragment extends Fragment {
         public DibbitAdapter(List<Dibbit> dibbits) {
             mDibbits = dibbits;
         }
+
 
         @Override
         public DibbitHolder onCreateViewHolder(ViewGroup parent, int viewType) {
