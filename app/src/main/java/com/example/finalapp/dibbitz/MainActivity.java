@@ -77,12 +77,6 @@ public class MainActivity extends AppCompatActivity implements
 			finish();
 		}
 
-		Intent intent = new Intent(MainActivity.this, LoginSignUpActivity.class);
-		startActivity(intent);
-
-
-
-
 
 
 	}
