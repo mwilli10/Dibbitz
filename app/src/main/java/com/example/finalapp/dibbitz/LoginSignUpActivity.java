@@ -4,12 +4,10 @@ package com.example.finalapp.dibbitz;
  * Created by KJ on 12/8/15.
  */
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -21,7 +19,7 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
-public class LoginSignupActivity extends AppCompatActivity {
+public class LoginSignUpActivity extends AppCompatActivity {
     // Declare Variables
     Button loginbutton;
     Button signup;
@@ -67,7 +65,7 @@ public class LoginSignupActivity extends AppCompatActivity {
                             System.out.println("Inside done()");
                             if ((e== null) &( user != null)) {
                                 // Valid user... Let them in the app
-                                startActivity(new Intent(LoginSignupActivity.this, MainActivity.class));
+                                startActivity(new Intent(LoginSignUpActivity.this, MainActivity.class));
                                 Toast.makeText(getApplicationContext(),
                                         ("Welcome back " + usernametxt),
                                         Toast.LENGTH_SHORT).show();
