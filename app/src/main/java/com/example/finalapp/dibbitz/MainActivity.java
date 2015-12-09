@@ -59,10 +59,6 @@ public class MainActivity extends AppCompatActivity implements
 		ParseUser currentUser = ParseUser.getCurrentUser();
 		if (currentUser != null) {
 
-			// Send logged in users to Welcome.class
-//			Intent intent = new Intent(MainActivity.this, LoginSignUpActivity.class);
-//			startActivity(intent);
-			//Toast.makeText(getApplicationContext(), "Find a way to start the app now" , Toast.LENGTH_LONG).show();
 
 			// init tabhost
 			this.initializeTabHost(savedInstanceState);
@@ -71,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements
 
 			finish();
 		} else {
-			// Send user to LoginSignUpActivity.class
 			Intent intent = new Intent(MainActivity.this, LoginSignUpActivity.class);
 			startActivity(intent);
 			finish();
