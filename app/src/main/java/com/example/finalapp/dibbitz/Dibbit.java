@@ -46,6 +46,7 @@ public class Dibbit extends ParseObject{
 
     public void setDescription(String description) {
         put("mDescription",description);
+        saveInBackground();
     }
 
     public double getDifficulty() {
@@ -54,6 +55,7 @@ public class Dibbit extends ParseObject{
 
     public void setDifficulty(double difficulty) {
         put("mDifficulty", difficulty);
+        saveInBackground();
     }
 
     public String getTitle() {

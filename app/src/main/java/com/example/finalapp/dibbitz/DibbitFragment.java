@@ -21,6 +21,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import java.io.File;
@@ -40,6 +41,7 @@ public class DibbitFragment extends Fragment {
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_TIME = 1;
     private static final int REQUEST_PHOTO = 2;
+    private static final int NUM_STARS = 5;
 
     private Dibbit mDibbit;
     private EditText mTitleField;
@@ -49,6 +51,7 @@ public class DibbitFragment extends Fragment {
     private ImageView mPhotoView;
     private ImageButton mPhotoButton;
     private File mPhotoFile;
+    private RatingBar mRatingBar;
 
 
     public static DibbitFragment newInstance(UUID dibbitId) {
@@ -122,6 +125,16 @@ public class DibbitFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 //Set the dibbit's done property
                 mDibbit.setDone(isChecked);
+            }
+        });
+
+        mRatingBar = (RatingBar) v.findViewById(R.id.dibbit_difficulty_ratingBar);
+        mRatingBar.setNumStars(NUM_STARS);
+        mRatingBar.setStepSize(0.5f);
+        mRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                mDibbit.setDifficulty((double)rating);
             }
         });
 
