@@ -62,6 +62,12 @@
             android:name=".DibbitPagerActivity"
             android:label="@string/app_name"
             android:parentActivityName=".DibbitPagerActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.INSERT" />
+                <category android:name="android.intent.category.APP_CALENDAR" />
+                <data android:mimeType="vnd.android.cursor.item/event" />
+            </intent-filter>
         </activity>
 
     </application>

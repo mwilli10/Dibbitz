@@ -53,14 +53,14 @@
 
     <Button android:id="@+id/dibbit_date"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="37dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp" />
 
 
     <Button android:id="@+id/dibbit_time"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp" />
     <LinearLayout
@@ -107,7 +107,7 @@
     <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="89dp"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp">
@@ -136,6 +136,7 @@
             android:cropToPadding="true"
             android:layout_toRightOf="@id/dibbit_photo_label"
             android:contentDescription="Relevant Pic"/>
+
     </RelativeLayout>
 
     <CheckBox android:id="@+id/dibbit_done"
@@ -159,8 +160,16 @@
               android:layout_marginLeft="16dp"
               android:layout_marginRight="16dp"/>
 
-
-
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="save"
+        android:id="@+id/btn_save"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/dibbit_photo"
+        android:layout_alignStart="@+id/dibbit_photo"
+        android:layout_gravity="center_horizontal" />
 
 
 </LinearLayout>
