@@ -52,6 +52,7 @@ public class DibbitFragment extends Fragment {
     private ImageButton mPhotoButton;
     private File mPhotoFile;
     private RatingBar mRatingBar;
+    private EditText mDescriptionBox;
 
 
     public static DibbitFragment newInstance(UUID dibbitId) {
@@ -131,10 +132,30 @@ public class DibbitFragment extends Fragment {
         mRatingBar = (RatingBar) v.findViewById(R.id.dibbit_difficulty_ratingBar);
         mRatingBar.setNumStars(NUM_STARS);
         mRatingBar.setStepSize(0.5f);
+        mRatingBar.setRating((float)mDibbit.getDifficulty());
         mRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                mDibbit.setDifficulty((double)rating);
+                mDibbit.setDifficulty((double) rating);
+            }
+        });
+
+        mDescriptionBox = (EditText) v.findViewById(R.id.dibbit_description);
+        mDescriptionBox.setText(mDibbit.getDescription());
+        mDescriptionBox.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mDibbit.setDescription(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
@@ -202,8 +223,8 @@ public class DibbitFragment extends Fragment {
     }
 
     private void updateDate() {
-
-        mDateButton.setText(android.text.format.DateFormat.format("EEEE, MMM dd, yyyy", mDibbit.getDate()).toString());
+        Date date = mDibbit.getDate();
+        mDateButton.setText(android.text.format.DateFormat.format("EEEE, MMM dd, yyyy", date));
     }
 
     private void updateTime() {
