@@ -59,10 +59,12 @@ public class DibbitListFragment extends Fragment {
 
 
         mDibbitRecyclerView = (RecyclerView) view.findViewById(R.id.dibbit_recycler_view);
+        mDibbitRecyclerView.setAdapter(mAdapter);
         mDibbitRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         mLinearLayout = (LinearLayout) view.findViewById(R.id.empty_dibbit_list);
         mAddButton = (Button) view.findViewById(R.id.add_dibbit_button);
+
 
         updateUI();
 
@@ -136,9 +138,7 @@ public class DibbitListFragment extends Fragment {
     private void updateUI() {
         DibbitLab dibbitLab = DibbitLab.get(getActivity());
         dibbitLab.updateDibbits();
-//        if(dibbitLab.didDataSetChange()){
-//            mAdapter.notifyDataSetChanged();
-//        }
+
         List<Dibbit> dibbits = dibbitLab.getDibbits();
 
 
@@ -148,12 +148,6 @@ public class DibbitListFragment extends Fragment {
         } else {
             mAdapter.notifyItemChanged(mChangedPosition);
             mChangedPosition = RecyclerView.NO_POSITION; //Not sure
-            /*if (getArguments() == null) {
-                mAdapter.notifyDataSetChanged();
-            }
-            else {
-                mAdapter.notifyItemChanged(getArguments().getInt(POSITION_OF_DIBBIT));
-            }*/
         }
         if (dibbits.size() > 0) {
             mLinearLayout.setVisibility(View.GONE);

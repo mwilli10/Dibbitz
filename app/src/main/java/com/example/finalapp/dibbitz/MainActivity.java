@@ -127,6 +127,8 @@ public class MainActivity extends AppCompatActivity implements
 				- (hScrollView.getWidth() - tabView.getWidth()) / 2;
 		hScrollView.smoothScrollTo(scrollPos, 0);
 
+
+
 	}
 
 	@Override
@@ -140,6 +142,10 @@ public class MainActivity extends AppCompatActivity implements
 	@Override
 	public void onPageSelected(int position) {
 		this.tabHost.setCurrentTab(position);
+		/*if (position == 1){
+			DibbitListFragment dlf = new DibbitListFragment();
+			dlf.onResume();
+		}*/
 	}
 
 }
