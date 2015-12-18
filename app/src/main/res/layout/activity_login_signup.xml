@@ -29,30 +29,18 @@
         android:layout_height="wrap_content"
         android:hint="Password"
         android:layout_marginTop="20dp"
-        android:id="@+id/password_box"/>
+        android:id="@+id/password_box"
+        android:inputType="textPassword"/>
 
     <Button
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
-        android:text="Login"
+        android:text="Login / Sign Up"
         android:layout_marginBottom="20dp"
-        android:id="@+id/login_button"/>
+        android:id="@+id/login_signup_button"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New?"
-        android:textSize="20sp"/>
-
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Sign Up"
-        android:layout_marginBottom="20dp"
-        android:id="@+id/signup_button"/>
 
 
 </LinearLayout>

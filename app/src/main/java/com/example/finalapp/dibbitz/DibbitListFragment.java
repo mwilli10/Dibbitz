@@ -39,6 +39,7 @@ public class DibbitListFragment extends Fragment {
     private int mChangedPosition;
 
 
+
     private static final String TAG = "DibbitListFragment";
     private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
 
@@ -63,8 +64,8 @@ public class DibbitListFragment extends Fragment {
         mLinearLayout = (LinearLayout) view.findViewById(R.id.empty_dibbit_list);
         mAddButton = (Button) view.findViewById(R.id.add_dibbit_button);
 
-
         updateUI();
+
 
         if (savedInstanceState != null) {
             mSubtitleVisible = savedInstanceState.getBoolean(SAVED_SUBTITLE_VISIBLE);
