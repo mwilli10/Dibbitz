@@ -151,6 +151,13 @@ public class MainActivity extends AppCompatActivity implements
 	public void onPageSelected(int position) {
 		this.tabHost.setCurrentTab(position);
 
+		/*if (position == 1){
+			DibbitListFragment dlf = new DibbitListFragment();
+			dlf.onResume();
+		}*/
 	}
-}
+
+
+	}
+
 

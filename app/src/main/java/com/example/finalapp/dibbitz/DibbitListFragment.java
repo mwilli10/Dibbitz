@@ -39,6 +39,7 @@ public class DibbitListFragment extends Fragment {
     private int mChangedPosition;
 
 
+
     private static final String TAG = "DibbitListFragment";
     private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
 
@@ -58,6 +59,7 @@ public class DibbitListFragment extends Fragment {
 
 
         mDibbitRecyclerView = (RecyclerView) view.findViewById(R.id.dibbit_recycler_view);
+        mDibbitRecyclerView.setAdapter(mAdapter);
         mDibbitRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         mLinearLayout = (LinearLayout) view.findViewById(R.id.empty_dibbit_list);
@@ -65,6 +67,7 @@ public class DibbitListFragment extends Fragment {
 
 
         updateUI();
+
 
         if (savedInstanceState != null) {
             mSubtitleVisible = savedInstanceState.getBoolean(SAVED_SUBTITLE_VISIBLE);
@@ -135,9 +138,7 @@ public class DibbitListFragment extends Fragment {
     private void updateUI() {
         DibbitLab dibbitLab = DibbitLab.get(getActivity());
         dibbitLab.updateDibbits();
-//        if(dibbitLab.didDataSetChange()){
-//            mAdapter.notifyDataSetChanged();
-//        }
+
         List<Dibbit> dibbits = dibbitLab.getDibbits();
 
 
@@ -147,12 +148,6 @@ public class DibbitListFragment extends Fragment {
         } else {
             mAdapter.notifyItemChanged(mChangedPosition);
             mChangedPosition = RecyclerView.NO_POSITION; //Not sure
-            /*if (getArguments() == null) {
-                mAdapter.notifyDataSetChanged();
-            }
-            else {
-                mAdapter.notifyItemChanged(getArguments().getInt(POSITION_OF_DIBBIT));
-            }*/
         }
         if (dibbits.size() > 0) {
             mLinearLayout.setVisibility(View.GONE);

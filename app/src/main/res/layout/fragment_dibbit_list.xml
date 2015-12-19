@@ -22,12 +22,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="16dp"
-                    android:text="@string/empty_dibbit_list_label"/>
 
                 <Button
                     android:id="@+id/add_dibbit_button"
