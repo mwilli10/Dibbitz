@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.Pair;
 import android.widget.ArrayAdapter;
 
 import java.io.File;
@@ -25,6 +26,8 @@ public class DibbitLab {
     private static DibbitLab sDibbitLab;
     private Context mContext;
     private boolean mDidDataSetChange=false;
+    List<Dibbit> mapDibbits= new ArrayList<>();
+    List<String> map= new ArrayList<>();
 
     private List<Dibbit> mDibbits;
 
@@ -88,6 +91,11 @@ public class DibbitLab {
         return mDidDataSetChange;
     }
 
+    public List<Dibbit> getMapDibbits(){
+        return mapDibbits;
+
+    }
+
     public List<Dibbit> getDibbits() {
         return mDibbits;
     }
@@ -117,6 +125,54 @@ public class DibbitLab {
         }
         return new File(externalFilesDir, dibbit.getPhotoFileName());
     }
+
+
+//    public void queryMapDibbits(){
+//        ParseQuery<ParseObject> query = ParseQuery.getQuery("Dibbit");
+//
+//        // Restrict to cases where the author is the current user.
+//        query.whereEqualTo("mUser", ParseUser.getCurrentUser());
+//        query.whereEqualTo("mMapStatus", true);
+//
+//        // Run the query
+//        query.findInBackground(new FindCallback<ParseObject>() {
+//            @Override
+//            public void done(List<ParseObject> dibbitList, ParseException e) {
+//                if (e == null) {
+//                    map.clear();
+//
+//
+//                    for (ParseObject dibbit : dibbitList) {
+//                        System.out.println("Got map location");
+//                        mapDibbits.add((Dibbit) dibbit);
+//                    }
+//
+//                } else {
+//                    Log.d("Post retrieval", "Error: " + e.getMessage());
+//                }
+//            }
+//
+//        });
+//
+//
+//    }
+
+    public List getLocations(){
+        List<Pair <String, String>> locations = new ArrayList<>();
+         for (Dibbit dibbit :mDibbits){
+             if (dibbit.getMapStatus()== true && dibbit.getLocation() != "" && dibbit.getLocation() != null){
+                 System.out.println("Got map location");
+                 mapDibbits.add((Dibbit) dibbit);
+                 Pair <String, String > mapDibbit = new Pair<>(dibbit.getTitle(), dibbit.getLocation());
+                 locations.add(mapDibbit);
+             }
+         }
+        return locations;
+    }
+
+
+
+
 
 }
 

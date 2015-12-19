@@ -58,6 +58,14 @@ public class Dibbit extends ParseObject{
         saveInBackground();
     }
 
+    public int getEventId(){
+        return getInt("mEventId");
+    }
+    public void setEventId(int eventID){
+        put("mEventId", eventID);
+        saveInBackground();
+    }
+
     public String getTitle() {
         return getString("mTitle");
     }
@@ -76,6 +84,15 @@ public class Dibbit extends ParseObject{
         saveInBackground();
     }
 
+    public String getLocation() {
+        return getString("mLocation");
+    }
+
+
+    public void setLocation(String location) {
+        put("mLocation", location);
+        saveInBackground();
+    }
     public Date getTime() {
         return getDate("mTime");
     }
@@ -100,6 +117,25 @@ public class Dibbit extends ParseObject{
     public String getPhotoFileName() {
         return "IMG"+ getId().toString()+".jpg";
 
+    }
+
+    public boolean getCalStatus() {
+        return getBoolean("mCalStatus");
+    }
+
+
+    public void setCalStatus( boolean saveToCal) {
+        put("mCalStatus", saveToCal);
+        saveInBackground();
+    }
+    public boolean getMapStatus() {
+        return getBoolean("mMapStatus");
+    }
+
+
+    public void setMapStatus( boolean saveToMap) {
+        put("mMapStatus", saveToMap);
+        saveInBackground();
     }
 
        /* public String getDateString() {

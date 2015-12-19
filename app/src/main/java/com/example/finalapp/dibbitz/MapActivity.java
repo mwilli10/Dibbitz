@@ -6,9 +6,11 @@ import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -21,6 +23,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -32,6 +36,15 @@ public class MapActivity extends Fragment {
     private GoogleMap googleMap;
     MarkerOptions markerOptions;
     LatLng latLng;
+    private List<Dibbit> mapDibbits;
+    private DibbitLab dibbitLab;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,10 +64,12 @@ public class MapActivity extends Fragment {
         }
 
         googleMap = mMapView.getMap();
+
+
         // latitude and longitude
-        double latitude = 17.385044;
-        double longitude = 78.486671;
-        String location = "1600 Amphitheatre Parkway, Mountain View, CA";
+//        double latitude = 17.385044;
+//        double longitude = 78.486671;
+//        String location = "1600 Amphitheatre Parkway, Mountain View, CA";
 
 //        // create marker
 //        MarkerOptions marker = new MarkerOptions().position(
@@ -70,73 +85,56 @@ public class MapActivity extends Fragment {
 //                .target(new LatLng(17.385044, 78.486671)).zoom(12).build();
 //        googleMap.animateCamera(CameraUpdateFactory
 //                .newCameraPosition(cameraPosition));
+        String location ="";
+        List<Pair<String, String>> locations = dibbitLab.get(getContext()).getLocations();
 
+        new GeocoderTask().addMarkers(locations);
 
-
-        if(location!=null && !location.equals("")){
-            new GeocoderTask().execute(location);
+            // Perform any camera updates here
+            return v;
         }
-
-        // Perform any camera updates here
-        return v;
-    }
 
     // An AsyncTask class for accessing the GeoCoding Web Service
-    private class GeocoderTask extends AsyncTask<String, Void, List<Address>> {
+    private class GeocoderTask {
 
-        @Override
-        protected List<Address> doInBackground(String... locationName) {
+        private void addMarkers(List<Pair<String, String>> locationName) {
             // Creating an instance of Geocoder class
             Geocoder geocoder = new Geocoder(getActivity().getApplicationContext());
-            List<Address> addresses = null;
+            List<Address> address = null;
+            String location;
 
-            try {
-                // Getting a maximum of 3 Address that matches the input text
-                addresses = geocoder.getFromLocationName(locationName[0], 3);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return addresses;
-        }
-
-        @Override
-        protected void onPostExecute(List<Address> addresses) {
-
-            if(addresses==null || addresses.size()==0){
-                Toast.makeText(getActivity().getApplicationContext(), "No Location found", Toast.LENGTH_SHORT).show();
-            }
-
-            // Clears all the existing markers on the map
-            googleMap.clear();
-
-            // Adding Markers on Google Map for each matching address
-            for(int i=0;i<addresses.size();i++){
-
-                Address address = (Address) addresses.get(i);
-
-                // Creating an instance of GeoPoint, to display in Google Map
-                latLng = new LatLng(address.getLatitude(), address.getLongitude());
-
-                String addressText = String.format("%s, %s",
-                        address.getMaxAddressLineIndex() > 0 ? address.getAddressLine(0) : "",
-                        address.getCountryName());
-
-                markerOptions = new MarkerOptions();
-                markerOptions.position(latLng);
-                markerOptions.title(addressText);
-
-                googleMap.addMarker(markerOptions);
-
-                // Locate the first location
-                if(i==0) {
-                    CameraPosition cameraPosition = new CameraPosition.Builder()
-                            .target(new LatLng(address.getLatitude(), address.getLongitude())).zoom(15).build();
-
-                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            for (int i = 0; i < locationName.size(); i++) {
+                try {
+                     location = locationName.get(i).second;
+                    // Getting a maximum of 1 Address that matches the input text
+                    address = geocoder.getFromLocationName(location, 1);
+                    System.out.println(address);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+                if (address.size() > 0) {
+                    latLng = new LatLng(address.get(0).getLatitude(), address.get(0).getLongitude());
+                    markerOptions = new MarkerOptions();
+                    markerOptions.position(latLng);
+                    markerOptions.title(locationName.get(i).first);
+//                 Changing marker icon
+                    markerOptions.icon(BitmapDescriptorFactory
+                            .defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
+
+
+                    googleMap.addMarker(markerOptions);
+
+                }
+
+
             }
+            CameraPosition cameraPosition = new CameraPosition.Builder().target(latLng).zoom(12).build();
+            googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+
         }
-    }
+
+        }
 
 
 
@@ -160,10 +158,28 @@ public class MapActivity extends Fragment {
         mMapView.onDestroy();
     }
 
+
+
     @Override
     public void onLowMemory() {
         super.onLowMemory();
         mMapView.onLowMemory();
     }
 
+
+
+    public List<String> getDibbitsForMap() {
+        List<String> dibbitLocations = new ArrayList<>();
+//        DibbitLab.get(getContext()).queryMapDibbits();
+        mapDibbits = DibbitLab.get(getContext()).getMapDibbits();
+        System.out.print(mapDibbits.size());
+        for (int i = 0; i < mapDibbits.size(); i++) {
+            System.out.println("got the map dibbits");
+            if (!mapDibbits.get(i).getLocation().equals("") && mapDibbits.get(i).getLocation() != null) {
+                dibbitLocations.add(mapDibbits.get(i).getLocation());
+            }
+        }
+        System.out.println(dibbitLocations);
+        return dibbitLocations;
+    }
 }

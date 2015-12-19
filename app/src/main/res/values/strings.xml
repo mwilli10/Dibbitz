@@ -41,4 +41,11 @@
     <string name="show_dialog">Show Dialog</string>
     <string name="undo">Undo</string>
     <string name="camera_img">Camera Image</string>
+
+
+    <string name="save_to_cal_label">Save to Calendar</string>
+    <string name="save_to_map_label">Save to Map</string>
+
+    <string name="remove_from_map_label">Remove from Map</string>
+    <string name="remove_from_cal_label">Remove from Calendar</string>
 </resources>
