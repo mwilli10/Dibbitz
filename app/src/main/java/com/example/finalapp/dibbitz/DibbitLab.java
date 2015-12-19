@@ -25,9 +25,9 @@ import com.parse.ParseQuery;
 public class DibbitLab {
     private static DibbitLab sDibbitLab;
     private Context mContext;
-    private boolean mDidDataSetChange=false;
-    List<Dibbit> mapDibbits= new ArrayList<>();
-    List<String> map= new ArrayList<>();
+    private boolean mDidDataSetChange = false;
+    List<Dibbit> mapDibbits = new ArrayList<>();
+    List<String> map = new ArrayList<>();
 
     private List<Dibbit> mDibbits;
 
@@ -35,8 +35,6 @@ public class DibbitLab {
         mContext = context;
         mDibbits = new ArrayList<>();
     }
-
-
 
 
 //        for(int i = 0; i < 100; i++) {
@@ -51,10 +49,10 @@ public class DibbitLab {
         if (sDibbitLab == null) {
             sDibbitLab = new DibbitLab(context);
         }
-            return sDibbitLab;
-        }
+        return sDibbitLab;
+    }
 
-    public void updateDibbits(){
+    public void updateDibbits() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Dibbit");
 
         // Restrict to cases where the author is the current user.
@@ -91,7 +89,7 @@ public class DibbitLab {
         return mDidDataSetChange;
     }
 
-    public List<Dibbit> getMapDibbits(){
+    public List<Dibbit> getMapDibbits() {
         return mapDibbits;
 
     }
@@ -101,26 +99,26 @@ public class DibbitLab {
     }
 
     public Dibbit getDibbit(UUID id) {
-        for(Dibbit dibbit : mDibbits) {
-            if(dibbit.getId().equals(id)) {
+        for (Dibbit dibbit : mDibbits) {
+            if (dibbit.getId().equals(id)) {
                 return dibbit;
             }
         }
         return null;
     }
 
-    public void addDibbit(Dibbit c){
+    public void addDibbit(Dibbit c) {
         mDibbits.add(c);
     }
 
-    public void deleteDibbit(Dibbit c){
+    public void deleteDibbit(Dibbit c) {
         mDibbits.remove(c);
     }
 
-    public File getPhotoFile(Dibbit dibbit){
+    public File getPhotoFile(Dibbit dibbit) {
 
         File externalFilesDir = mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        if (externalFilesDir ==null){
+        if (externalFilesDir == null) {
             return null;
         }
         return new File(externalFilesDir, dibbit.getPhotoFileName());
@@ -157,22 +155,18 @@ public class DibbitLab {
 //
 //    }
 
-    public List getLocations(){
-        List<Pair <String, String>> locations = new ArrayList<>();
-         for (Dibbit dibbit :mDibbits){
-             if (dibbit.getMapStatus()== true && dibbit.getLocation() != "" && dibbit.getLocation() != null){
-                 System.out.println("Got map location");
-                 mapDibbits.add((Dibbit) dibbit);
-                 Pair <String, String > mapDibbit = new Pair<>(dibbit.getTitle(), dibbit.getLocation());
-                 locations.add(mapDibbit);
-             }
-         }
+    public List getLocations() {
+        List<Pair<String, String>> locations = new ArrayList<>();
+        for (Dibbit dibbit : mDibbits) {
+            if (dibbit.getMapStatus() == true && dibbit.getLocation() != "" && dibbit.getLocation() != null) {
+                System.out.println("Got map location");
+                mapDibbits.add((Dibbit) dibbit);
+                Pair<String, String> mapDibbit = new Pair<>(dibbit.getTitle(), dibbit.getLocation());
+                locations.add(mapDibbit);
+            }
+        }
         return locations;
     }
-
-
-
-
 
 }
 

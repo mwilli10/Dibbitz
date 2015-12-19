@@ -66,7 +66,6 @@ public class DibbitListFragment extends Fragment {
         mLinearLayout = (LinearLayout) view.findViewById(R.id.empty_dibbit_list);
         mAddButton = (Button) view.findViewById(R.id.add_dibbit_button);
 
-
         updateUI();
 
 
@@ -191,8 +190,8 @@ public class DibbitListFragment extends Fragment {
             mLocation = location;
             mTitleTextView.setText(mDibbit.getTitle());
 
-            mDateTextView.setText(mDibbit.getDate().toString());
-//            mDateTextView.setText(mDibbit.getDate().toString());
+         //   mDateTextView.setText(mDibbit.getDate().toString());
+
             mDateTextView.setText(android.text.format.DateFormat.format("EEEE, MMM dd, yyyy", mDibbit.getDate()));
             mSolvedCheckBox.setChecked(mDibbit.isDone());
         }
