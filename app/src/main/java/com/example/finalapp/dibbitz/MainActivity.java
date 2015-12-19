@@ -29,6 +29,9 @@ public class MainActivity extends AppCompatActivity implements
 	private MyFragmentPagerAdapter myViewPagerAdapter;
 	int i = 0;
 
+	private String[] tabs = {"List", "Calendar", "Map"};
+
+
 	// fake content for tabhost
 	class FakeContent implements TabContentFactory {
 		private final Context mContext;
@@ -77,15 +80,14 @@ public class MainActivity extends AppCompatActivity implements
 		}*/
 
 
-
 	}
 
 	private void initializeViewPager() {
 		List<Fragment> fragments = new Vector<Fragment>();
 
 		fragments.add(new DibbitListFragment());
-		fragments.add(new MapActivity());
 		fragments.add(new CalendarActivity());
+		fragments.add(new MapActivity());
 
 
 		this.myViewPagerAdapter = new MyFragmentPagerAdapter(
@@ -103,11 +105,11 @@ public class MainActivity extends AppCompatActivity implements
 		tabHost = (TabHost) findViewById(android.R.id.tabhost);
 		tabHost.setup();
 
-		for (int i = 1; i <=3; i++) {
+		for (String tabName : tabs) {
 
 			TabHost.TabSpec tabSpec;
-			tabSpec = tabHost.newTabSpec("Tab " + i);
-			tabSpec.setIndicator("Tab " + i);
+			tabSpec = tabHost.newTabSpec(tabName);
+			tabSpec.setIndicator(tabName);
 			tabSpec.setContent(new FakeContent(this));
 			tabHost.addTab(tabSpec);
 		}
@@ -119,7 +121,13 @@ public class MainActivity extends AppCompatActivity implements
 	@Override
 	public void onTabChanged(String tabId) {
 		int pos = this.tabHost.getCurrentTab();
+		System.out.println("pos"+pos);
+		if (pos == 1) {
+			this.myViewPagerAdapter.fragments.remove(pos);
+			this.myViewPagerAdapter.fragments.add(new MapActivity());
+		}
 		this.viewPager.setCurrentItem(pos);
+
 
 		HorizontalScrollView hScrollView = (HorizontalScrollView) findViewById(R.id.h_scroll_view);
 		View tabView = tabHost.getCurrentTabView();
@@ -128,8 +136,8 @@ public class MainActivity extends AppCompatActivity implements
 		hScrollView.smoothScrollTo(scrollPos, 0);
 
 
-
 	}
+
 
 	@Override
 	public void onPageScrollStateChanged(int arg0) {
@@ -142,10 +150,14 @@ public class MainActivity extends AppCompatActivity implements
 	@Override
 	public void onPageSelected(int position) {
 		this.tabHost.setCurrentTab(position);
+
 		/*if (position == 1){
 			DibbitListFragment dlf = new DibbitListFragment();
 			dlf.onResume();
 		}*/
 	}
 
-}
+
+	}
+
+

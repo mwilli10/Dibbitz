@@ -190,8 +190,10 @@ public class DibbitListFragment extends Fragment {
             mDibbit = dibbit;
             mLocation = location;
             mTitleTextView.setText(mDibbit.getTitle());
-            mDateTextView.setText(mDibbit.getDate().toString());
 
+            mDateTextView.setText(mDibbit.getDate().toString());
+//            mDateTextView.setText(mDibbit.getDate().toString());
+            mDateTextView.setText(android.text.format.DateFormat.format("EEEE, MMM dd, yyyy", mDibbit.getDate()));
             mSolvedCheckBox.setChecked(mDibbit.isDone());
         }
 
