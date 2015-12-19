@@ -24,6 +24,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -57,7 +58,7 @@ public class DibbitListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dibbit_list, container, false);
 
-
+        System.out.println("IT'S HERE");
         mDibbitRecyclerView = (RecyclerView) view.findViewById(R.id.dibbit_recycler_view);
         mDibbitRecyclerView.setAdapter(mAdapter);
         mDibbitRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -78,6 +79,7 @@ public class DibbitListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        //DO SOMETHING WITH THE DATE HERE TO FIX IT
         updateUI();
     }
 
@@ -173,6 +175,7 @@ public class DibbitListFragment extends Fragment {
         private TextView mDateTextView;
         private CheckBox mSolvedCheckBox;
 
+
         private int mLocation;
 
         public DibbitHolder(View itemView) {
@@ -188,11 +191,13 @@ public class DibbitListFragment extends Fragment {
             mLocation = location;
             mTitleTextView.setText(mDibbit.getTitle());
             mDateTextView.setText(mDibbit.getDate().toString());
+
             mSolvedCheckBox.setChecked(mDibbit.isDone());
         }
 
         @Override
         public void onClick(View v) {
+            mDibbit.setDate(mDibbit.getDate());
             Intent intent = DibbitPagerActivity.newIntent(getActivity(), mDibbit.getId());
             startActivity(intent);
             mChangedPosition = mLocation;

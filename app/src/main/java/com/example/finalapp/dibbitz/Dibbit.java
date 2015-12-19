@@ -29,6 +29,7 @@ public class Dibbit extends ParseObject{
         //Constructor makes Dibbit with random ID and empty date
         mId = UUID.randomUUID();
         setDate(new Date());
+        setTime(new Date());
         put("mUser",ParseUser.getCurrentUser());
         saveInBackground();
 
