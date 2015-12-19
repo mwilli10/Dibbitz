@@ -89,6 +89,7 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
         UUID dibbitId = (UUID) getArguments().getSerializable(ARG_DIBBIT_ID);
         mDibbit = DibbitLab.get(getActivity()).getDibbit(dibbitId);
         mPhotoFile = DibbitLab.get(getActivity()).getPhotoFile(mDibbit);
+
     }
 
     @Override
@@ -285,6 +286,7 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
         if (requestCode == REQUEST_DATE) {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mDibbit.setDate(date);
+            System.out.println("THIS HAPPENED");
             updateDate();
         }
 
@@ -315,12 +317,11 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
     }
 
     private void updateDate() {
-        Date date = mDibbit.getDate();
-        mDateButton.setText(android.text.format.DateFormat.format("EEEE, MMM dd, yyyy", date));
+        mDateButton.setText(android.text.format.DateFormat.format("EEEE, MMM dd, yyyy", mDibbit.getDate()));
     }
 
     private void updateTime() {
-        mTimeButton.setText(android.text.format.DateFormat.format("hh:mm a", mDibbit.getDate()));
+        mTimeButton.setText(android.text.format.DateFormat.format("hh:mm a", mDibbit.getTime()));
     }
 
     private void updatePhotoView(){

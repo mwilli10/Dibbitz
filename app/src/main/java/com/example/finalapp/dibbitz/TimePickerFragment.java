@@ -46,6 +46,7 @@ public class TimePickerFragment extends DialogFragment {
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
+
         int hour = calendar.get(Calendar.HOUR);
         int minute = calendar.get(Calendar.MINUTE);
 
@@ -72,12 +73,7 @@ public class TimePickerFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         int hour = mTimePicker.getHour();
                         int minute = mTimePicker.getMinute();
-                        /*Date date = (Date) getArguments().getSerializable(ARG_TIME);
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.setTime(date);
-                        int year = calendar.get(Calendar.YEAR);
-                        int month = calendar.get(Calendar.MONTH);
-                        int day = calendar.get(Calendar.DAY_OF_MONTH);*/
+
                         Date date = new GregorianCalendar(year, month, day, hour, minute).getTime();
                         sendResult(Activity.RESULT_OK, date);
                     }
