@@ -87,9 +87,9 @@ public class MapActivity extends Fragment {
 //                .newCameraPosition(cameraPosition));
         String location ="";
         List<Pair<String, String>> locations = dibbitLab.get(getContext()).getLocations();
-
-        new GeocoderTask().addMarkers(locations);
-
+        if (locations.size()>0) {
+            new GeocoderTask().addMarkers(locations);
+        }
             // Perform any camera updates here
             return v;
         }
