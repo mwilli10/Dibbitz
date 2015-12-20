@@ -142,7 +142,7 @@ public class DibbitListFragment extends Fragment {
     }
 
 
-    private void updateUI() {
+    public void updateUI() {
         DibbitLab dibbitLab = DibbitLab.get(getActivity());
         dibbitLab.updateDibbits();
 

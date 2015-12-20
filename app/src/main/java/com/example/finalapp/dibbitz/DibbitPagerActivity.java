@@ -47,8 +47,10 @@ public class DibbitPagerActivity extends AppCompatActivity {
             @Override
             public Fragment getItem(int position) {
                 Dibbit dibbit = mDibbits.get(position);
-//                Date date = (Date) getIntent().getSerializableExtra("date");
-//                dibbit.setDate(date);
+                Date date = (Date) getIntent().getSerializableExtra("date");
+                if (date != null) {
+                    dibbit.setDate(date);
+                }
                 System.out.println("HERE: " + dibbit.getDate());
                 return DibbitFragment.newInstance(dibbit.getId());
             }

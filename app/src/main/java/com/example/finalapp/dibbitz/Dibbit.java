@@ -142,7 +142,7 @@ public class Dibbit extends ParseObject implements Comparable<Dibbit> {
 
 
         if (isDone) {
-           // DibbitListFragment dlf = new DibbitListFragment();
+           //
             new AlertDialog.Builder(context)
                     .setTitle("Delete entry")
                     .setMessage("You sure you want to click this?  You'll never see this dibbit again")
@@ -151,6 +151,8 @@ public class Dibbit extends ParseObject implements Comparable<Dibbit> {
                             // continue with delete
                             deleteEventually();
                             //REFRESH HERE IS BETTER
+                           // DibbitListFragment dlf = new DibbitListFragment();
+                            //dlf.updateUI();
                         }
                     })
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
