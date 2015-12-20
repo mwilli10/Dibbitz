@@ -63,6 +63,7 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
     private Dibbit mDibbit;
     private EditText mTitleField;
     private EditText mLocationField;
+    private Date mDate;
 
     private Button mDateButton;
     private CheckBox mDoneCheckBox;
@@ -91,6 +92,7 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
         UUID dibbitId = (UUID) getArguments().getSerializable(ARG_DIBBIT_ID);
         mDibbit = DibbitLab.get(getActivity()).getDibbit(dibbitId);
         mPhotoFile = DibbitLab.get(getActivity()).getPhotoFile(mDibbit);
+        mDate = mDibbit.getDate();
 
     }
 
@@ -113,16 +115,17 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (mDibbit.getCalStatus()){
-                    if (mDibbit.getEventId() !=0 ){
+                if (mDibbit.getCalStatus()) {
+                    if (mDibbit.getEventId() != 0) {
                         updateCalendarEntry(mDibbit.getEventId());
                     }
-                     //
+                    //
                 }
             }
         });
 
         mDateButton = (Button) v.findViewById(R.id.dibbit_date);
+        System.out.println("B: " + android.text.format.DateFormat.format("EEEE, MMM dd, yyyy", mDate));
         updateDate();
         mDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -298,15 +301,22 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != Activity.RESULT_OK) {
             return;
         }
 
+
+        //Updates the date/time buttons
         if (requestCode == REQUEST_DATE) {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mDibbit.setDate(date);
-            System.out.println("THIS HAPPENED");
             updateDate();
         }
 
@@ -325,7 +335,7 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
     }
 
     private void updateTime() {
-        mTimeButton.setText(android.text.format.DateFormat.format("hh:mm a", mDibbit.getTime()));
+        mTimeButton.setText(android.text.format.DateFormat.format("hh:mm a", mDibbit.getDate()));
     }
 
     private void updatePhotoView(){

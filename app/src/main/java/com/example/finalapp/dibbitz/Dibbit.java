@@ -4,16 +4,23 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.UUID;
+import java.util.Comparator;
 
 /**
  * Created by user on 10/6/15.
  */
 @ParseClassName("Dibbit")
-public class Dibbit extends ParseObject{
+public class Dibbit extends ParseObject implements Comparable<Dibbit> {
     private UUID mId;
+
+    @Override
+    public int compareTo(Dibbit another) {
+        return (this.getDate().compareTo(another.getDate()));
+    }
 
     // Don't actually need these anymore, but it's dope to see what's there
     private String mTitle;

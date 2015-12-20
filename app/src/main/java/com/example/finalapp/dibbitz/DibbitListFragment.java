@@ -192,17 +192,19 @@ public class DibbitListFragment extends Fragment {
             mDibbit = dibbit;
             mLocation = location;
             mTitleTextView.setText(mDibbit.getTitle());
-
-         //   mDateTextView.setText(mDibbit.getDate().toString());
+           // mDateTextView.setText(mDibbit.getDate().toString());
 
             mDateTextView.setText(android.text.format.DateFormat.format("EEEE, MMM dd, yyyy", mDibbit.getDate()));
             mSolvedCheckBox.setChecked(mDibbit.isDone());
+            System.out.println(android.text.format.DateFormat.format("EEEE, MMM dd, yyyy", mDibbit.getDate()));
+
         }
 
         @Override
         public void onClick(View v) {
-            mDibbit.setDate(mDibbit.getDate());
+            System.out.println("A: " + android.text.format.DateFormat.format("EEEE, MMM dd, yyyy", mDibbit.getDate()));
             Intent intent = DibbitPagerActivity.newIntent(getActivity(), mDibbit.getId());
+            intent.putExtra("date",mDibbit.getDate());
             startActivity(intent);
             mChangedPosition = mLocation;
         }

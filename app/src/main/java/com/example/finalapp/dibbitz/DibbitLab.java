@@ -18,6 +18,7 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.ParseQuery;
 
+import java.util.Collections;
 
 /**
  * Created by user on 10/8/2015.
@@ -72,6 +73,7 @@ public class DibbitLab {
                         System.out.println("Got one");
                         mDibbits.add((Dibbit) dibbit);
                     }
+                    Collections.sort(mDibbits);
 
                     //mDidDataSetChange = true;
                     //THIS THE SHIT THAT AIN'T WORKING RIGHT
@@ -84,6 +86,8 @@ public class DibbitLab {
         });
 
     }
+
+
 
     public boolean didDataSetChange() {
         return mDidDataSetChange;

@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -35,6 +36,8 @@ public class DibbitPagerActivity extends AppCompatActivity {
 
         UUID dibbitId = (UUID) getIntent().getSerializableExtra(EXTRA_DIBBIT_ID);
 
+
+
         mViewPager = (ViewPager) findViewById(R.id.activity_dibbit_pager_view_pager);
 
         mDibbits = DibbitLab.get(this).getDibbits();
@@ -44,6 +47,9 @@ public class DibbitPagerActivity extends AppCompatActivity {
             @Override
             public Fragment getItem(int position) {
                 Dibbit dibbit = mDibbits.get(position);
+                Date date = (Date) getIntent().getSerializableExtra("date");
+                dibbit.setDate(date);
+                System.out.println("HERE: " + dibbit.getDate());
                 return DibbitFragment.newInstance(dibbit.getId());
             }
 
