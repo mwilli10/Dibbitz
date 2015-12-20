@@ -1,6 +1,9 @@
 package com.example.finalapp.dibbitz;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.net.wifi.p2p.WifiP2pManager;
+import android.support.v7.app.AlertDialog;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
@@ -134,11 +137,35 @@ public class Dibbit extends ParseObject implements Comparable<Dibbit> {
         return getBoolean("mIsDone");
     }
 
-    public void setDone(boolean isDone) {
-        put("mIsDone",isDone);
-        if (isDone){
-            deleteEventually();
+    public void setDone(boolean isDone, Context context) {
+        put("mIsDone", isDone);
+
+
+        if (isDone) {
+           // DibbitListFragment dlf = new DibbitListFragment();
+            new AlertDialog.Builder(context)
+                    .setTitle("Delete entry")
+                    .setMessage("You sure you want to click this?  You'll never see this dibbit again")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // continue with delete
+                            deleteEventually();
+                            //REFRESH HERE IS BETTER
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+
+            //REFRESH HERE IS OKAY
+
         }
+
+
         saveInBackground();
     }
 

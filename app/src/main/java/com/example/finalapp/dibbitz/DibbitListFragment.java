@@ -205,7 +205,8 @@ public class DibbitListFragment extends Fragment {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     //Set the dibbit's done property
-                    mDibbit.setDone(isChecked);
+                    mDibbit.setDone(isChecked,getContext());
+                    updateUI();
                 }
             });
 

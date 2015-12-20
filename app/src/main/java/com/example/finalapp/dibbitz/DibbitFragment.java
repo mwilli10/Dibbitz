@@ -173,7 +173,8 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 //Set the dibbit's done property
-                mDibbit.setDone(isChecked);
+                mDibbit.setDone(isChecked,getContext());
+
             }
         });
 
