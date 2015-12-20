@@ -59,6 +59,7 @@ public class DibbitLab {
         // Restrict to cases where the author is the current user.
         query.whereEqualTo("mUser", ParseUser.getCurrentUser());
 
+
         // Run the query
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
@@ -74,10 +75,6 @@ public class DibbitLab {
                         mDibbits.add((Dibbit) dibbit);
                     }
                     //Collections.sort(mDibbits);
-
-                    //mDidDataSetChange = true;
-                    //THIS THE SHIT THAT AIN'T WORKING RIGHT
-                    //(RecyclerView.Adapter) DLF.getAdapter().notifyDataSetChanged();
                 } else {
                     Log.d("Post retrieval", "Error: " + e.getMessage());
                 }

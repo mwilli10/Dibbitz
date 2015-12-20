@@ -178,7 +178,7 @@ public class DibbitListFragment extends Fragment {
         private TextView mTitleTextView;
         private TextView mDateTextView;
         private CheckBox mSolvedCheckBox;
-        private Button mDeleteButton;
+        private Button mShareButton;
 
 
         private int mLocation;
@@ -189,7 +189,7 @@ public class DibbitListFragment extends Fragment {
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_dibbit_title_text_view);
             mDateTextView = (TextView) itemView.findViewById(R.id.list_item_dibbit_date_text_view);
             mSolvedCheckBox = (CheckBox) itemView.findViewById(R.id.list_item_dibbit_done_check_box);
-            mDeleteButton = (Button) itemView.findViewById(R.id.delete_button);
+            mShareButton = (Button) itemView.findViewById(R.id.share_button);
         }
 
         public void bindDibbit(final Dibbit dibbit, final int location) {
@@ -200,11 +200,11 @@ public class DibbitListFragment extends Fragment {
             mDateTextView.setText(android.text.format.DateFormat.format("EEEE, MMM dd, yyyy", mDibbit.getDate()));
 
             mSolvedCheckBox.setChecked(mDibbit.isDone());
-            mDeleteButton.setOnClickListener(new View.OnClickListener() {
+            mShareButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    DibbitLab.get(getActivity()).deleteDibbit(dibbit);
-                    Toast.makeText(getContext(), ("Deleted"), Toast.LENGTH_SHORT).show();
+                    dibbit.makePublic();
+                    Toast.makeText(getContext(), ("Shared"), Toast.LENGTH_SHORT).show();
                 }
             });
 

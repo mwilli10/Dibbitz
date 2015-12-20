@@ -1,14 +1,18 @@
 package com.example.finalapp.dibbitz;
 
+import android.net.wifi.p2p.WifiP2pManager;
+
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+import com.parse.ParseACL;
 
 
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.UUID;
 import java.util.Comparator;
+
 
 /**
  * Created by user on 10/6/15.
@@ -30,6 +34,8 @@ public class Dibbit extends ParseObject implements Comparable<Dibbit> {
     private double mDifficulty;
     private String mDescription;
     private ParseUser mUser;
+    //private ParseACL mParseACL;
+
 
 
     public Dibbit() {
@@ -37,7 +43,9 @@ public class Dibbit extends ParseObject implements Comparable<Dibbit> {
         mId = UUID.randomUUID();
         setDate(new Date());
         setTime(new Date());
-        put("mUser",ParseUser.getCurrentUser());
+        put("mUser", ParseUser.getCurrentUser());
+        ParseACL parseACL = new ParseACL(ParseUser.getCurrentUser());
+        setACL(parseACL);
         saveInBackground();
 
     }
@@ -48,6 +56,14 @@ public class Dibbit extends ParseObject implements Comparable<Dibbit> {
         return mId;
     }
 
+    public void makePublic(){
+        ParseACL parseACL = getACL();
+        parseACL.setPublicReadAccess(true);
+        parseACL.setPublicWriteAccess(true);
+        setACL(parseACL);
+        saveInBackground();
+    }
+
     public String getDescription() {
         return getString("mDescription");
     }
@@ -56,6 +72,8 @@ public class Dibbit extends ParseObject implements Comparable<Dibbit> {
         put("mDescription",description);
         saveInBackground();
     }
+
+
 
     public double getDifficulty() {
         return getDouble("mDifficulty");
