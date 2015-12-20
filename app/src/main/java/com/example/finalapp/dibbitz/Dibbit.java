@@ -136,6 +136,9 @@ public class Dibbit extends ParseObject implements Comparable<Dibbit> {
 
     public void setDone(boolean isDone) {
         put("mIsDone",isDone);
+        if (isDone){
+            deleteEventually();
+        }
         saveInBackground();
     }
 

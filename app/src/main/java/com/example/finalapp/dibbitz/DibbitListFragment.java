@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -177,7 +178,7 @@ public class DibbitListFragment extends Fragment {
 
         private TextView mTitleTextView;
         private TextView mDateTextView;
-        private CheckBox mSolvedCheckBox;
+        private CheckBox mDoneCheckBox;
         private Button mShareButton;
 
 
@@ -188,7 +189,7 @@ public class DibbitListFragment extends Fragment {
             itemView.setOnClickListener(this);
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_dibbit_title_text_view);
             mDateTextView = (TextView) itemView.findViewById(R.id.list_item_dibbit_date_text_view);
-            mSolvedCheckBox = (CheckBox) itemView.findViewById(R.id.list_item_dibbit_done_check_box);
+            mDoneCheckBox = (CheckBox) itemView.findViewById(R.id.list_item_dibbit_done_check_box);
             mShareButton = (Button) itemView.findViewById(R.id.share_button);
         }
 
@@ -199,7 +200,15 @@ public class DibbitListFragment extends Fragment {
            // mDateTextView.setText(mDibbit.getDate().toString());
             mDateTextView.setText(android.text.format.DateFormat.format("EEEE, MMM dd, yyyy", mDibbit.getDate()));
 
-            mSolvedCheckBox.setChecked(mDibbit.isDone());
+            mDoneCheckBox.setChecked(mDibbit.isDone());
+            mDoneCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    //Set the dibbit's done property
+                    mDibbit.setDone(isChecked);
+                }
+            });
+
             mShareButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
