@@ -37,6 +37,7 @@ public class Dibbit extends ParseObject implements Comparable<Dibbit> {
     private double mDifficulty;
     private String mDescription;
     private ParseUser mUser;
+    private boolean mIsPublic;
     //private ParseACL mParseACL;
 
 
@@ -47,7 +48,14 @@ public class Dibbit extends ParseObject implements Comparable<Dibbit> {
         setDate(new Date());
         setTime(new Date());
         put("mUser", ParseUser.getCurrentUser());
+
+//        ParseACL parseACL = getACL();
+//        if (!isPublic()) {
+//
+//        }
         ParseACL parseACL = new ParseACL(ParseUser.getCurrentUser());
+
+        put("mIsPublic", (parseACL.getPublicReadAccess() && parseACL.getPublicWriteAccess()));
         setACL(parseACL);
         saveInBackground();
 
@@ -65,6 +73,13 @@ public class Dibbit extends ParseObject implements Comparable<Dibbit> {
         parseACL.setPublicWriteAccess(true);
         setACL(parseACL);
         saveInBackground();
+
+        put("mIsPublic", true);
+        saveInBackground();
+    }
+
+    public boolean isPublic() {
+        return getBoolean("mIsPublic");
     }
 
     public String getDescription() {

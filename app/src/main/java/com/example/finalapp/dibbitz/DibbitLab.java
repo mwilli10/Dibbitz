@@ -59,7 +59,6 @@ public class DibbitLab {
         // Restrict to cases where the author is the current user.
         query.whereEqualTo("mUser", ParseUser.getCurrentUser());
 
-
         // Run the query
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
@@ -68,11 +67,14 @@ public class DibbitLab {
                     // If there are results, update the list of dibbits
                     // and notify the adapter
                     mDibbits.clear();
-                    //mDibbits.addAll((List<Dibbit>) dibbitList);
+
 
                     for (ParseObject dibbit : dibbitList) {
                         System.out.println("Got one");
                         mDibbits.add((Dibbit) dibbit);
+                        if(((Dibbit) dibbit).isPublic()){
+                            ((Dibbit) dibbit).makePublic();
+                        }
                     }
                     //Collections.sort(mDibbits);
                 } else {
@@ -82,13 +84,9 @@ public class DibbitLab {
 
         });
 
+
     }
 
-
-
-    public boolean didDataSetChange() {
-        return mDidDataSetChange;
-    }
 
     public List<Dibbit> getMapDibbits() {
         return mapDibbits;
