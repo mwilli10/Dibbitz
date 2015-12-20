@@ -78,12 +78,6 @@ public class DibbitListFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        //DO SOMETHING WITH THE DATE HERE TO FIX IT
-        updateUI();
-    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -206,7 +200,7 @@ public class DibbitListFragment extends Fragment {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     //Set the dibbit's done property
                     mDibbit.setDone(isChecked,getContext());
-                    updateUI();
+                   // updateUI();
                 }
             });
 
