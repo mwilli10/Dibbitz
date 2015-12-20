@@ -73,7 +73,7 @@ public class DibbitLab {
                         System.out.println("Got one");
                         mDibbits.add((Dibbit) dibbit);
                     }
-                    Collections.sort(mDibbits);
+                    //Collections.sort(mDibbits);
 
                     //mDidDataSetChange = true;
                     //THIS THE SHIT THAT AIN'T WORKING RIGHT
@@ -117,6 +117,7 @@ public class DibbitLab {
 
     public void deleteDibbit(Dibbit c) {
         mDibbits.remove(c);
+
     }
 
     public File getPhotoFile(Dibbit dibbit) {

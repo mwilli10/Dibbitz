@@ -38,18 +38,16 @@
         android:layout_marginLeft="30dp"
         tools:text="Dibbit Date"/>
 
-    <ImageView
-        android:id="@+id/list_item_bell"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_below ="@id/list_item_dibbit_done_check_box"
-        android:layout_toRightOf="@id/list_item_dibbit_date_text_view"
-        android:src="@drawable/bell"
-        android:background="@color/dull_light_blue"/>
-
-
-
-
+    <Button
+        android:background="@android:color/holo_blue_light"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:text="Delete"
+        android:textColor="@android:color/holo_red_dark"
+        android:id="@+id/delete_button"
+        android:layout_below="@+id/list_item_dibbit_done_check_box"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
 
 
 </RelativeLayout>

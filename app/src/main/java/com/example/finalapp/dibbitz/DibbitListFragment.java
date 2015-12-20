@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -38,6 +39,7 @@ public class DibbitListFragment extends Fragment {
     private LinearLayout mLinearLayout;
     private Button mAddButton;
     private int mChangedPosition;
+
 
 
 
@@ -176,6 +178,7 @@ public class DibbitListFragment extends Fragment {
         private TextView mTitleTextView;
         private TextView mDateTextView;
         private CheckBox mSolvedCheckBox;
+        private Button mDeleteButton;
 
 
         private int mLocation;
@@ -186,17 +189,24 @@ public class DibbitListFragment extends Fragment {
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_dibbit_title_text_view);
             mDateTextView = (TextView) itemView.findViewById(R.id.list_item_dibbit_date_text_view);
             mSolvedCheckBox = (CheckBox) itemView.findViewById(R.id.list_item_dibbit_done_check_box);
+            mDeleteButton = (Button) itemView.findViewById(R.id.delete_button);
         }
 
-        public void bindDibbit(Dibbit dibbit, int location) {
+        public void bindDibbit(final Dibbit dibbit, final int location) {
             mDibbit = dibbit;
             mLocation = location;
             mTitleTextView.setText(mDibbit.getTitle());
            // mDateTextView.setText(mDibbit.getDate().toString());
-
             mDateTextView.setText(android.text.format.DateFormat.format("EEEE, MMM dd, yyyy", mDibbit.getDate()));
+
             mSolvedCheckBox.setChecked(mDibbit.isDone());
-            System.out.println(android.text.format.DateFormat.format("EEEE, MMM dd, yyyy", mDibbit.getDate()));
+            mDeleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DibbitLab.get(getActivity()).deleteDibbit(dibbit);
+                    Toast.makeText(getContext(), ("Deleted"), Toast.LENGTH_SHORT).show();
+                }
+            });
 
         }
 
