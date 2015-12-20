@@ -112,6 +112,9 @@ public class DibbitListFragment extends Fragment {
                 getActivity().invalidateOptionsMenu();
                 updateSubtitle();
                 return true;
+            case R.id.menu_item_logout:
+            logout();
+            return true;
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -238,6 +241,12 @@ public class DibbitListFragment extends Fragment {
         public int getItemCount() {
             return mDibbits.size();
         }
+    }
+    private void logout() {
+        ParseUser.logOut();
+        Intent intent = new Intent(getActivity(), LoginSignUpActivity.class);
+        startActivity(intent);
+        getActivity().finish();
     }
 
 

@@ -3,6 +3,7 @@ package com.example.finalapp.dibbitz;
 import android.*;
 import android.Manifest;
 import android.app.Activity;
+import android.app.TimePickerDialog;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -33,6 +34,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.io.File;
@@ -135,6 +137,24 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
         mTimeButton = (Button) v.findViewById(R.id.dibbit_time);
         updateTime();
         mTimeButton.setOnClickListener(new View.OnClickListener() {
+
+//            @Override
+//            public void onClick(View v) {
+//                // TODO Auto-generated method stub
+//                Calendar mcurrentTime = Calendar.getInstance();
+//                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+//                int minute = mcurrentTime.get(Calendar.MINUTE);
+//                TimePickerDialog mTimePicker;
+//                mTimePicker = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+//                    @Override
+//                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+//                        mTimeButton.setText( selectedHour + ":" + selectedMinute);
+//                    }
+//                }, hour, minute, false);//Yes 24 hour time
+//                mTimePicker.setTitle("Select Time");
+//                mTimePicker.show();
+//
+//            }
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
@@ -291,28 +311,12 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
         }
 
         if (requestCode == REQUEST_TIME) {
-            Date date = (Date) data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
+            Date date = (Date) data.getSerializableExtra(TimePickerFragment.EXTRA_DATE);
             mDibbit.setDate(date);
             updateTime();
         }
         if (requestCode == REQUEST_PHOTO){
             updatePhotoView();
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch(item.getItemId()) {
-            case R.id.menu_item_delete_dibbit:
-                if (mDibbit != null)
-                    Toast.makeText(getActivity(), "Deleting this dibbit", Toast.LENGTH_SHORT).show();
-                DibbitLab.get(getActivity()).deleteDibbit(mDibbit);
-                getActivity().finish();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
         }
     }
 

@@ -98,6 +98,7 @@ public class MapActivity extends Fragment {
     private class GeocoderTask {
 
         private void addMarkers(List<Pair<String, String>> locationName) {
+            double[] latLong  = new double[2];
             // Creating an instance of Geocoder class
             Geocoder geocoder = new Geocoder(getActivity().getApplicationContext());
             List<Address> address = null;
@@ -114,6 +115,8 @@ public class MapActivity extends Fragment {
                 }
                 if (address.size() > 0) {
                     latLng = new LatLng(address.get(0).getLatitude(), address.get(0).getLongitude());
+                    latLong[0] = latLong[0]+address.get(0).getLatitude();
+                    latLong[1] = latLong[1]+address.get(0).getLongitude();
                     markerOptions = new MarkerOptions();
                     markerOptions.position(latLng);
                     markerOptions.title(locationName.get(i).first);
@@ -128,6 +131,8 @@ public class MapActivity extends Fragment {
 
 
             }
+            System.out.println("size" +locationName.size());
+            latLng = new LatLng(latLong[0]/locationName.size(), latLong[1]/locationName.size());
             CameraPosition cameraPosition = new CameraPosition.Builder().target(latLng).zoom(12).build();
             googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
