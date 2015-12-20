@@ -53,14 +53,12 @@ public class Dibbit extends ParseObject implements Comparable<Dibbit> {
 //        if (!isPublic()) {
 //
 //        }
-        ParseACL parseACL = new ParseACL(ParseUser.getCurrentUser());
+       // ParseACL parseACL = checkAndUpdatePublicness();
 
-        put("mIsPublic", (parseACL.getPublicReadAccess() && parseACL.getPublicWriteAccess()));
-        setACL(parseACL);
         saveInBackground();
 
     }
-
+;
     //There's no need to save the UUId because Parse makes it's own IDs
     //Pretty fuckin clutch
     public UUID getId() {
@@ -74,10 +72,26 @@ public class Dibbit extends ParseObject implements Comparable<Dibbit> {
         setACL(parseACL);
         saveInBackground();
 
-        put("mIsPublic", true);
+        put("mIsPublic", (parseACL.getPublicReadAccess() && parseACL.getPublicWriteAccess()));
         saveInBackground();
     }
 
+    public ParseACL checkAndUpdatePublicness(){
+        if (isPublic()) {
+            makePublic();
+
+        }
+
+        else{
+        ParseACL parseACL = getACL();
+            parseACL.setPublicWriteAccess(false);
+            parseACL.setPublicReadAccess(false);
+            setACL(parseACL);
+            saveInBackground();
+
+        }
+        return getACL();
+    }
     public boolean isPublic() {
         return getBoolean("mIsPublic");
     }
