@@ -45,8 +45,6 @@ public class Dibbit extends ParseObject implements Comparable<Dibbit> {
     public Dibbit() {
         //Constructor makes Dibbit with random ID and empty date
         mId = UUID.randomUUID();
-        setDate(new Date());
-        setTime(new Date());
         put("mUser", ParseUser.getCurrentUser());
 
 //        ParseACL parseACL = getACL();
