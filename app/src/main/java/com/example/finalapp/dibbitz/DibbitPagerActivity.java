@@ -33,7 +33,6 @@ public class DibbitPagerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dibbit_pager);
-
         UUID dibbitId = (UUID) getIntent().getSerializableExtra(EXTRA_DIBBIT_ID);
 
 
@@ -42,30 +41,34 @@ public class DibbitPagerActivity extends AppCompatActivity {
 
         mDibbits = DibbitLab.get(this).getDibbits();
         FragmentManager fragmentManager = getSupportFragmentManager();
+
+
+
         mViewPager.setAdapter(new FragmentPagerAdapter(fragmentManager) {
 
             @Override
             public Fragment getItem(int position) {
                Dibbit dibbit = mDibbits.get(position);
-//                Date date = (Date) getIntent().getSerializableExtra("date");
-//                if (date != null) {
-//                    dibbit.setDate(date);
-//                }
                 System.out.println("HERE: " + dibbit.getDate());
                 return DibbitFragment.newInstance(dibbit.getId());
             }
 
             @Override
             public int getCount() {
+                System.out.println("COUNT: " + mDibbits.size());
                 return mDibbits.size();
             }
         });
+
         for (int i = 0; i < mDibbits.size(); i++) {
+            System.out.println("IT's in here");
             if (mDibbits.get(i).getId().equals(dibbitId)) {
+                System.out.println("LOCATION: " + i);
                 mViewPager.setCurrentItem(i);
                 break;
             }
         }
+
     }
 }
 

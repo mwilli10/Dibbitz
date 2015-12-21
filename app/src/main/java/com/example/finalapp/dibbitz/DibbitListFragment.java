@@ -107,6 +107,9 @@ public class DibbitListFragment extends Fragment {
             case R.id.menu_item_new_dibbit:
                 addDibbit();
                 return true;
+            case R.id.menu_item_refresh:
+                updateUI();
+                return true;
             case R.id.menu_item_show_subtitle:
                 mSubtitleVisible = !mSubtitleVisible;
                 getActivity().invalidateOptionsMenu();
@@ -167,6 +170,7 @@ public class DibbitListFragment extends Fragment {
 
         updateSubtitle();
 
+
     }
 
 
@@ -225,9 +229,8 @@ public class DibbitListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            System.out.println("A: " + android.text.format.DateFormat.format("EEEE, MMM dd, yyyy", mDibbit.getDate()));
             Intent intent = DibbitPagerActivity.newIntent(getActivity(), mDibbit.getId());
-            intent.putExtra("date",mDibbit.getDate());
+            System.out.println("WE AT: " + mLocation);
             startActivity(intent);
             mChangedPosition = mLocation;
         }

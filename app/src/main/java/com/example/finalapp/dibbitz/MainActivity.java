@@ -62,23 +62,6 @@ public class MainActivity extends AppCompatActivity implements
 		this.initializeViewPager();
 
 
-		/*// Get current user data from Parse.com
-		ParseUser currentUser = ParseUser.getCurrentUser();
-		if (currentUser != null) {
-
-
-			// init tabhost
-			this.initializeTabHost(savedInstanceState);
-			// init ViewPager
-			this.initializeViewPager();
-
-			finish();
-		} else {
-			Intent intent = new Intent(MainActivity.this, LoginSignUpActivity.class);
-			startActivity(intent);
-			finish();
-		}*/
-
 
 	}
 
@@ -122,10 +105,15 @@ public class MainActivity extends AppCompatActivity implements
 	public void onTabChanged(String tabId) {
 		int pos = this.tabHost.getCurrentTab();
 		System.out.println("pos"+pos);
-		if (pos == 1) {
+		if (pos == 2) {
 			this.myViewPagerAdapter.fragments.remove(pos);
 			this.myViewPagerAdapter.fragments.add(new MapActivity());
 		}
+		if (pos == 0) {
+			this.myViewPagerAdapter.fragments.remove(pos);
+			this.myViewPagerAdapter.fragments.add(pos, new DibbitListFragment());
+		}
+
 		this.viewPager.setCurrentItem(pos);
 
 
@@ -134,7 +122,6 @@ public class MainActivity extends AppCompatActivity implements
 		int scrollPos = tabView.getLeft()
 				- (hScrollView.getWidth() - tabView.getWidth()) / 2;
 		hScrollView.smoothScrollTo(scrollPos, 0);
-
 
 	}
 
@@ -151,10 +138,6 @@ public class MainActivity extends AppCompatActivity implements
 	public void onPageSelected(int position) {
 		this.tabHost.setCurrentTab(position);
 
-		/*if (position == 1){
-			DibbitListFragment dlf = new DibbitListFragment();
-			dlf.onResume();
-		}*/
 	}
 
 
