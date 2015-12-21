@@ -55,6 +55,7 @@ public class DatePickerFragment extends DialogFragment {
         mDatePicker = (DatePicker) v.findViewById(R.id.dialog_date_date_picker);
         mDatePicker.init(year, month, day, null);
 
+        // Opens date picker dialogue
         return new AlertDialog.Builder(getActivity())
                 .setView(v)
                 .setTitle(R.string.date_picker_title)
@@ -78,7 +79,6 @@ public class DatePickerFragment extends DialogFragment {
 
         Intent intent = new Intent();
         intent.putExtra(EXTRA_DATE, date);
-
 
         getTargetFragment().onActivityResult(getTargetRequestCode(), resultCode, intent);
     }

@@ -2,7 +2,7 @@ package com.example.finalapp.dibbitz;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.net.wifi.p2p.WifiP2pManager;
+
 import android.support.v7.app.AlertDialog;
 
 import com.parse.ParseClassName;
@@ -11,35 +11,18 @@ import com.parse.ParseUser;
 import com.parse.ParseACL;
 
 
-import java.text.DateFormat;
+
 import java.util.Date;
 import java.util.UUID;
-import java.util.Comparator;
+
 
 
 /**
  * Created by user on 10/6/15.
  */
 @ParseClassName("Dibbit")
-public class Dibbit extends ParseObject implements Comparable<Dibbit> {
+public class Dibbit extends ParseObject {
     private UUID mId;
-
-    @Override
-    public int compareTo(Dibbit another) {
-        return (this.getDate().compareTo(another.getDate()));
-    }
-
-    // Don't actually need these anymore, but it's dope to see what's there
-    private String mTitle;
-    private Date mDate;
-    private Date mTime;
-    private boolean mIsDone;
-    private double mDifficulty;
-    private String mDescription;
-    private ParseUser mUser;
-    private boolean mIsPublic;
-    //private ParseACL mParseACL;
-
 
 
     public Dibbit() {
@@ -47,18 +30,12 @@ public class Dibbit extends ParseObject implements Comparable<Dibbit> {
         mId = UUID.randomUUID();
         put("mUser", ParseUser.getCurrentUser());
 
-//        ParseACL parseACL = getACL();
-//        if (!isPublic()) {
-//
-//        }
-       // ParseACL parseACL = checkAndUpdatePublicness();
+
 
         saveInBackground();
 
     }
-;
-    //There's no need to save the UUId because Parse makes it's own IDs
-    //Pretty fuckin clutch
+
     public UUID getId() {
         return mId;
     }
@@ -181,8 +158,7 @@ public class Dibbit extends ParseObject implements Comparable<Dibbit> {
                             // continue with delete
                             deleteEventually();
                             //REFRESH HERE IS BETTER
-                           // DibbitListFragment dlf = new DibbitListFragment();
-                            //dlf.updateUI();
+
                         }
                     })
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -192,8 +168,6 @@ public class Dibbit extends ParseObject implements Comparable<Dibbit> {
                     })
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
-
-            //REFRESH HERE IS OKAY
 
         }
 
@@ -225,11 +199,6 @@ public class Dibbit extends ParseObject implements Comparable<Dibbit> {
         put("mMapStatus", saveToMap);
         saveInBackground();
     }
-
-       /* public String getDateString() {
-        return DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(mDate);
-    }*/
-
 
 
 }

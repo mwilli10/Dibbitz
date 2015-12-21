@@ -8,8 +8,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -49,21 +47,17 @@ public class DibbitPagerActivity extends AppCompatActivity {
             @Override
             public Fragment getItem(int position) {
                Dibbit dibbit = mDibbits.get(position);
-                System.out.println("HERE: " + dibbit.getDate());
                 return DibbitFragment.newInstance(dibbit.getId());
             }
 
             @Override
             public int getCount() {
-                System.out.println("COUNT: " + mDibbits.size());
                 return mDibbits.size();
             }
         });
 
         for (int i = 0; i < mDibbits.size(); i++) {
-            System.out.println("IT's in here");
             if (mDibbits.get(i).getId().equals(dibbitId)) {
-                System.out.println("LOCATION: " + i);
                 mViewPager.setCurrentItem(i);
                 break;
             }

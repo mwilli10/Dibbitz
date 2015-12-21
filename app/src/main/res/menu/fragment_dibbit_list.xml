@@ -12,14 +12,15 @@
         android:icon="@mipmap/refresh_image"
         android:title="Refresh"
         app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/menu_item_logout"
+        android:title="@string/logout_label"
+        app:showAsAction="ifRoom|withText"/>
 
     <item
         android:id="@+id/menu_item_show_subtitle"
         android:title="@string/show_count"
         app:showAsAction="ifRoom"/>
 
-    <item
-        android:id="@+id/menu_item_logout"
-        android:title="@string/logout_label"
-        app:showAsAction="ifRoom|withText"/>
+
 </menu>

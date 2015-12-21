@@ -1,7 +1,6 @@
 package com.example.finalapp.dibbitz;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,9 +12,6 @@ import android.widget.HorizontalScrollView;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
-
-import com.parse.ParseUser;
-
 import java.util.List;
 import java.util.Vector;
 
@@ -65,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements
 
 	}
 
+	// Add fragments to tabhost
 	private void initializeViewPager() {
 		List<Fragment> fragments = new Vector<Fragment>();
 
@@ -104,15 +101,14 @@ public class MainActivity extends AppCompatActivity implements
 	@Override
 	public void onTabChanged(String tabId) {
 		int pos = this.tabHost.getCurrentTab();
-		System.out.println("pos"+pos);
-		if (pos == 2) {
-			this.myViewPagerAdapter.fragments.remove(pos);
-			this.myViewPagerAdapter.fragments.add(new MapActivity());
-		}
-		if (pos == 0) {
-			this.myViewPagerAdapter.fragments.remove(pos);
-			this.myViewPagerAdapter.fragments.add(pos, new DibbitListFragment());
-		}
+//		if (pos == 2) {
+//			this.myViewPagerAdapter.fragments.remove(pos);
+//			this.myViewPagerAdapter.fragments.add(new MapActivity());
+//		}
+//		if (pos == 0) {
+//			this.myViewPagerAdapter.fragments.remove(pos);
+//			this.myViewPagerAdapter.fragments.add(pos, new DibbitListFragment());
+//		}
 
 		this.viewPager.setCurrentItem(pos);
 

@@ -1,18 +1,17 @@
 package com.example.finalapp.dibbitz;
 
-import android.*;
 import android.Manifest;
 import android.app.Activity;
-import android.app.TimePickerDialog;
+
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
+
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
+
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.provider.MediaStore;
@@ -22,9 +21,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -34,14 +31,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
-import android.widget.TimePicker;
 import android.widget.Toast;
-
 import java.io.File;
-import java.net.URI;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.TimeZone;
 import java.util.UUID;
 
@@ -113,6 +106,7 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
                 mDibbit.setTitle(s.toString());
             }
 
+            // If dibbit is in calendar, update it
             @Override
             public void afterTextChanged(Editable s) {
                 if (mDibbit.getCalStatus()) {
@@ -125,8 +119,9 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
         });
 
         mDateButton = (Button) v.findViewById(R.id.dibbit_date);
-
         updateDate();
+        // Open date dialogue
+        // If dibbit is in calendar, update it
         mDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,6 +141,8 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
 
         mTimeButton = (Button) v.findViewById(R.id.dibbit_time);
         updateTime();
+        // Open time dialogue
+        // If dibbit is in calendar, update it
         mTimeButton.setOnClickListener(new View.OnClickListener() {
 
 //            @Override
@@ -192,6 +189,7 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
             }
         });
 
+        // Allow rating bar to be set to half value
         mRatingBar = (RatingBar) v.findViewById(R.id.dibbit_difficulty_ratingBar);
         mRatingBar.setNumStars(NUM_STARS);
         mRatingBar.setStepSize(0.5f);
@@ -202,6 +200,8 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
                 mDibbit.setDifficulty((double) rating);
             }
         });
+
+
 
         mDescriptionBox = (EditText) v.findViewById(R.id.dibbit_description);
         mDescriptionBox.setText(mDibbit.getDescription());
@@ -216,6 +216,7 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
                 mDibbit.setDescription(s.toString());
             }
 
+            //If dibbit in calendar, update it
             @Override
             public void afterTextChanged(Editable s) {
                 if (mDibbit.getCalStatus()){
@@ -247,6 +248,7 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
         mPhotoView = (ImageView) v.findViewById(R.id.dibbit_photo);
         updatePhotoView();
 
+        // Update or remove dibbit to calendar based on user click
         mCalSaveButton = (Button) v.findViewById(R.id.btn_calendar_save);
         if (mDibbit.getCalStatus()){
             mCalSaveButton.setText(R.string.remove_from_cal_label);
@@ -260,17 +262,18 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
                 if (!mDibbit.getCalStatus()) {
                     addEventToCalendar(getActivity());
                     mDibbit.setCalStatus(true);
+                    mCalSaveButton.setText(R.string.remove_from_cal_label);
                 }else {
                     if(mDibbit.getEventId() > 0 ) {
                         deleteCalendarEntry(mDibbit.getEventId());
-                        mCalSaveButton.setText(R.string.remove_from_cal_label
-                        );
+                        mCalSaveButton.setText(R.string.save_to_cal_label);
                         mDibbit.setCalStatus(false);
                     }
                 }
 
             }
         });
+        // Update or remove dibbit to map based on user click
         mMapSaveButton = (Button) v.findViewById(R.id.btn_map_save);
         if (mDibbit.getMapStatus()){
             mMapSaveButton.setText(R.string.remove_from_map_label);
@@ -286,6 +289,7 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
                     mMapSaveButton.setText(R.string.remove_from_map_label);
                 }else{
                     mDibbit.setMapStatus(false);
+                    Toast.makeText(getActivity(), "Removed from Map", Toast.LENGTH_SHORT).show();
                     mMapSaveButton.setText(R.string.save_to_map_label);
                 }
             }
@@ -362,12 +366,14 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
 
     }
 
+    // Access Dibbit attributes and insert event to calendar using Content Resolver and Values
     public void addEventToCalendar(Activity curActivity) {
 
         long calID = 1;
         Calendar calDate = Calendar.getInstance();
-        long endMillis = (calDate.getTimeInMillis() + 60 * 60 * 1000);
+
         long testDate = mDibbit.getDate().getTime();
+        long endMillis = (testDate + 60 * 60 * 1000);
 
         ContentResolver cr = getActivity().getContentResolver();
         ContentValues values = new ContentValues();
@@ -399,25 +405,25 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
         }
 
 
-
+    // Access Dibbit attributes and update event in calendar using Content Resolver and Values
     private int updateCalendarEntry(int eventID) {
         int iNumRowsUpdated = 0;
-        long calID = 1;
 
         ContentResolver cr = getActivity().getContentResolver();
         ContentValues values = new ContentValues();
         Uri updateUri = null;
 
         Calendar calDate = Calendar.getInstance();
-        long startMillis = calDate.getTimeInMillis();
-        long endMillis = (calDate.getTimeInMillis() + 60 * 60 * 1000);
+
+        long testDate = mDibbit.getDate().getTime();
+        long endMillis = (testDate + 60 * 60 * 1000);
+
 
         values.put(CalendarContract.Events.EVENT_COLOR, 2);
-        values.put(CalendarContract.Events.DTSTART, startMillis);
+        values.put(CalendarContract.Events.DTSTART, testDate);
         values.put(CalendarContract.Events.DTEND, endMillis);
         values.put(CalendarContract.Events.TITLE, mDibbit.getTitle());
         values.put(CalendarContract.Events.DESCRIPTION, mDibbit.getDescription());
-        values.put(CalendarContract.Events.CALENDAR_ID, calID);
         values.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().toString());
 
         values.put("hasAlarm", 1); // 0 for false, 1 for true
@@ -432,11 +438,12 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
         Uri deleteUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
         int rows = getActivity().getContentResolver().delete(deleteUri, null, null);
         if (rows>0){
-            Toast.makeText(getActivity(), "deleted from calendar",Toast.LENGTH_SHORT ).show();
+            Toast.makeText(getActivity(), "Deleted from Calendar",Toast.LENGTH_SHORT ).show();
             mDibbit.setCalStatus(false);
         }
         return iNumRowsUpdated;
     }
+
 
         @Override
         public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {

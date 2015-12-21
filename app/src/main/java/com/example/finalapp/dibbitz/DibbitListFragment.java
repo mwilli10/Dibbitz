@@ -1,15 +1,14 @@
 package com.example.finalapp.dibbitz;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,14 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
-
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -66,7 +58,6 @@ public class DibbitListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dibbit_list, container, false);
 
-        System.out.println("IT'S HERE");
         mDibbitRecyclerView = (RecyclerView) view.findViewById(R.id.dibbit_recycler_view);
         mDibbitRecyclerView.setAdapter(mAdapter);
         mDibbitRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -130,7 +121,7 @@ public class DibbitListFragment extends Fragment {
     private void updateSubtitle() {
         DibbitLab dibbitLab = DibbitLab.get(getActivity());
         int dibbitCount = dibbitLab.getDibbits().size();
-//        String subtitle = getString(R.string.subtitle_format, dibbitCount);
+
         String subtitle = getResources().getQuantityString(R.plurals.subtitle_plural, dibbitCount, dibbitCount);
         if (!mSubtitleVisible) {
             subtitle = null;
@@ -206,8 +197,7 @@ public class DibbitListFragment extends Fragment {
                 mBackground.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.dull_light_green));
             }
             mTitleTextView.setText(mDibbit.getTitle());
-            //mDateTextView.setText(mDibbit.getDate().toString());
-            mDateTextView.setText(android.text.format.DateFormat.format("EEEE, MMM dd, yyyy", mDibbit.getDate()));
+            mDateTextView.setText(android.text.format.DateFormat.format("EEEE, MMM dd, yyyy, hh:mm a", mDibbit.getDate()));
 
             mDoneCheckBox.setChecked(mDibbit.isDone());
             mDoneCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -215,7 +205,6 @@ public class DibbitListFragment extends Fragment {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     //Set the dibbit's done property
                     mDibbit.setDone(isChecked, getContext());
-                    // updateUI();
                 }
             });
             if (dibbit.isPublic()){
@@ -237,7 +226,6 @@ public class DibbitListFragment extends Fragment {
         @Override
         public void onClick(View v) {
             Intent intent = DibbitPagerActivity.newIntent(getActivity(), mDibbit.getId());
-            System.out.println("WE AT: " + mLocation);
             startActivity(intent);
             mChangedPosition = mLocation;
         }

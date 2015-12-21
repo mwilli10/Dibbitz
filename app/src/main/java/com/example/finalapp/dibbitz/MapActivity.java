@@ -3,15 +3,13 @@ package com.example.finalapp.dibbitz;
 
 import android.location.Address;
 import android.location.Geocoder;
-import android.os.AsyncTask;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -23,12 +21,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
+
 import java.util.List;
 
 /**
- * A fragment that launches other parts of the demo application.
+ * A fragment that launches google map view
  */
 public class MapActivity extends Fragment {
 
@@ -75,7 +72,7 @@ public class MapActivity extends Fragment {
             return v;
         }
 
-    // An AsyncTask class for accessing the GeoCoding Web Service
+    // An Geocoder class for accessing the GeoCoding Web Service
     private class GeocoderTask {
 
         private void addMarkers(List<Pair<String, String>> locationName) {
@@ -84,7 +81,6 @@ public class MapActivity extends Fragment {
             Geocoder geocoder = new Geocoder(getActivity().getApplicationContext());
             List<Address> address = null;
             String location;
-
             for (int i = 0; i < locationName.size(); i++) {
                 try {
                      location = locationName.get(i).second;
@@ -94,14 +90,15 @@ public class MapActivity extends Fragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                if (address.size() > 0) {
+                if ( address.size() > 0) {
                     latLng = new LatLng(address.get(0).getLatitude(), address.get(0).getLongitude());
                     latLong[0] = latLong[0]+address.get(0).getLatitude();
                     latLong[1] = latLong[1]+address.get(0).getLongitude();
                     markerOptions = new MarkerOptions();
                     markerOptions.position(latLng);
                     markerOptions.title(locationName.get(i).first);
-//                 Changing marker icon
+                    markerOptions.snippet(locationName.get(i).second);
+//                 Setting marker icon
                     markerOptions.icon(BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
 
@@ -112,7 +109,6 @@ public class MapActivity extends Fragment {
 
 
             }
-            System.out.println("size" +locationName.size());
             latLng = new LatLng(latLong[0]/locationName.size(), latLong[1]/locationName.size());
             CameraPosition cameraPosition = new CameraPosition.Builder().target(latLng).zoom(12).build();
             googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
@@ -120,7 +116,7 @@ public class MapActivity extends Fragment {
 
         }
 
-        }
+    }
 
 
 
@@ -152,20 +148,4 @@ public class MapActivity extends Fragment {
         mMapView.onLowMemory();
     }
 
-
-
-    public List<String> getDibbitsForMap() {
-        List<String> dibbitLocations = new ArrayList<>();
-//        DibbitLab.get(getContext()).queryMapDibbits();
-        mapDibbits = DibbitLab.get(getContext()).getMapDibbits();
-        System.out.print(mapDibbits.size());
-        for (int i = 0; i < mapDibbits.size(); i++) {
-            System.out.println("got the map dibbits");
-            if (!mapDibbits.get(i).getLocation().equals("") && mapDibbits.get(i).getLocation() != null) {
-                dibbitLocations.add(mapDibbits.get(i).getLocation());
-            }
-        }
-        System.out.println(dibbitLocations);
-        return dibbitLocations;
-    }
 }

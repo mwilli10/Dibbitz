@@ -18,7 +18,7 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.ParseQuery;
 
-import java.util.Collections;
+
 
 /**
  * Created by user on 10/8/2015.
@@ -36,14 +36,6 @@ public class DibbitLab {
         mContext = context;
         mDibbits = new ArrayList<>();
     }
-
-
-//        for(int i = 0; i < 100; i++) {
-//            Dibbit dibbit = new Dibbit();
-//            dibbit.setTitle("Dibbit #" + i);
-//            dibbit.setSolved(i%2 == 0);  //every other one
-//            mDibbits.add(dibbit);
-//        }
 
 
     public static DibbitLab get(Context context) {
@@ -78,7 +70,6 @@ public class DibbitLab {
 
 
                     for (ParseObject dibbit : dibbitList) {
-                        System.out.println("Got one");
                         mDibbits.add((Dibbit) dibbit);
                         if(((Dibbit) dibbit).isPublic()){
                             ((Dibbit) dibbit).makePublic();
@@ -86,7 +77,7 @@ public class DibbitLab {
 
                         }
                     }
-                    //Collections.sort(mDibbits);
+
                 } else {
                     Log.d("Post retrieval", "Error: " + e.getMessage());
                 }
@@ -120,10 +111,6 @@ public class DibbitLab {
         mDibbits.add(c);
     }
 
-    public void deleteDibbit(Dibbit c) {
-        mDibbits.remove(c);
-
-    }
 
     public File getPhotoFile(Dibbit dibbit) {
 
@@ -135,41 +122,10 @@ public class DibbitLab {
     }
 
 
-//    public void queryMapDibbits(){
-//        ParseQuery<ParseObject> query = ParseQuery.getQuery("Dibbit");
-//
-//        // Restrict to cases where the author is the current user.
-//        query.whereEqualTo("mUser", ParseUser.getCurrentUser());
-//        query.whereEqualTo("mMapStatus", true);
-//
-//        // Run the query
-//        query.findInBackground(new FindCallback<ParseObject>() {
-//            @Override
-//            public void done(List<ParseObject> dibbitList, ParseException e) {
-//                if (e == null) {
-//                    map.clear();
-//
-//
-//                    for (ParseObject dibbit : dibbitList) {
-//                        System.out.println("Got map location");
-//                        mapDibbits.add((Dibbit) dibbit);
-//                    }
-//
-//                } else {
-//                    Log.d("Post retrieval", "Error: " + e.getMessage());
-//                }
-//            }
-//
-//        });
-//
-//
-//    }
-
     public List getLocations() {
         List<Pair<String, String>> locations = new ArrayList<>();
         for (Dibbit dibbit : mDibbits) {
             if (dibbit.getMapStatus() == true && dibbit.getLocation() != "" && dibbit.getLocation() != null) {
-                System.out.println("Got map location");
                 mapDibbits.add((Dibbit) dibbit);
                 Pair<String, String> mapDibbit = new Pair<>(dibbit.getTitle(), dibbit.getLocation());
                 locations.add(mapDibbit);

@@ -11,7 +11,7 @@
     <string name="dibbit_description_label">Description:</string>
     <string name="dibbit_description_hint">Tell me more about it</string>
     <string name="dibbit_location_label">Location:</string>
-    <string name="dibbit_location_hint">Where is it?</string>
+    <string name="dibbit_location_hint">Address, City, State</string>
     <string name="dibbit_difficulty_label">Difficulty:</string>
     <string name="date_picker_title">Date of dibbit:</string>
     <string name="time_picker_title">Time of dibbit:</string>
