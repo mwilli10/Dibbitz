@@ -103,12 +103,9 @@ public class MapActivity extends Fragment {
                     markerOptions.icon(BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
 
-
                     googleMap.addMarker(markerOptions);
 
                 }
-
-
             }
             latLng = new LatLng(latLong[0]/locationName.size(), latLong[1]/locationName.size());
             CameraPosition cameraPosition = new CameraPosition.Builder().target(latLng).zoom(12).build();

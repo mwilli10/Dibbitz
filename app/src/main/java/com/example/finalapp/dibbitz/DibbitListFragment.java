@@ -205,7 +205,6 @@ public class DibbitListFragment extends Fragment {
             mDoneCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    //Set the dibbit's done property
                     mDibbit.setDone(isChecked, getContext());
                 }
             });

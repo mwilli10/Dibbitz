@@ -29,11 +29,7 @@ public class Dibbit extends ParseObject {
         //Constructor makes Dibbit with random ID and empty date
         mId = UUID.randomUUID();
         put("mUser", ParseUser.getCurrentUser());
-
-
-
         saveInBackground();
-
     }
 
     public UUID getId() {
@@ -124,21 +120,10 @@ public class Dibbit extends ParseObject {
         return getString("mLocation");
     }
 
-
     public void setLocation(String location) {
         put("mLocation", location);
         saveInBackground();
     }
-    public Date getTime() {
-        return getDate("mTime");
-    }
-
-
-    public void setTime(Date time) {
-        put("mTime", time);
-        saveInBackground();
-    }
-
 
     public boolean isDone() {
         return getBoolean("mIsDone");
@@ -157,7 +142,6 @@ public class Dibbit extends ParseObject {
                         public void onClick(DialogInterface dialog, int which) {
                             // continue with delete
                             deleteEventually();
-                            //REFRESH HERE IS BETTER
 
                         }
                     })

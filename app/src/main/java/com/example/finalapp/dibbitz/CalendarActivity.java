@@ -34,21 +34,9 @@ public class CalendarActivity extends Fragment {
 
             }
         });
-
         return v;
 
     }
 
-//
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        startActivity(new Intent(Intent.ACTION_VIEW, android.net.Uri.parse("content://com.android.calendar/time/")));
-//    }
-//
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//    }
 }
 

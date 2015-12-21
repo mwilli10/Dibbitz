@@ -61,13 +61,10 @@ public class DibbitLab {
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> dibbitList, ParseException e) {
-
                 if (e == null) {
                     // If there are results, update the list of dibbits
                     // and notify the adapter
                     mDibbits.clear();
-
-
                     for (ParseObject dibbit : dibbitList) {
                         mDibbits.add((Dibbit) dibbit);
                         if(((Dibbit) dibbit).isPublic()){

@@ -373,27 +373,22 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
     public void addEventToCalendar(Activity curActivity) {
 
         long calID = 1;
-        Calendar calDate = Calendar.getInstance();
-
-        long testDate = mDibbit.getDate().getTime();
-        long endMillis = (testDate + 60 * 60 * 1000);
+        long sDate = mDibbit.getDate().getTime();
+        long edDate = (sDate + 60 * 60 * 1000);
 
         ContentResolver cr = getActivity().getContentResolver();
         ContentValues values = new ContentValues();
         values.put(CalendarContract.Events.EVENT_COLOR, 2);
-        values.put(CalendarContract.Events.DTSTART, testDate);
-        values.put(CalendarContract.Events.DTEND, endMillis);
+        values.put(CalendarContract.Events.DTSTART, sDate);
+        values.put(CalendarContract.Events.DTEND, edDate);
         values.put(CalendarContract.Events.TITLE, mDibbit.getTitle());
         values.put(CalendarContract.Events.DESCRIPTION, mDibbit.getDescription());
         values.put(CalendarContract.Events.CALENDAR_ID, calID);
         values.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().toString());
-
         values.put("hasAlarm", 1); // 0 for false, 1 for true
 
 
             //DO CHECK PERMISSION
-            Toast.makeText(getActivity(), "Added to Calendar", Toast.LENGTH_SHORT).show();
-
             if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
 
                 ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_CALENDAR},
@@ -402,6 +397,7 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
             Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values);
             int eventID = Integer.parseInt(uri.getLastPathSegment());
             mDibbit.setEventId(eventID);
+            Toast.makeText(getActivity(), "Added to Calendar", Toast.LENGTH_SHORT).show();
 
 
 
@@ -409,7 +405,7 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
 
 
     // Access Dibbit attributes and update event in calendar using Content Resolver and Values
-    private int updateCalendarEntry(int eventID) {
+    private void updateCalendarEntry(int eventID) {
         int iNumRowsUpdated = 0;
 
         ContentResolver cr = getActivity().getContentResolver();
@@ -418,13 +414,12 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
 
         Calendar calDate = Calendar.getInstance();
 
-        long testDate = mDibbit.getDate().getTime();
-        long endMillis = (testDate + 60 * 60 * 1000);
-
+        long sDate = mDibbit.getDate().getTime();
+        long edDate = (sDate + 60 * 60 * 1000);
 
         values.put(CalendarContract.Events.EVENT_COLOR, 2);
-        values.put(CalendarContract.Events.DTSTART, testDate);
-        values.put(CalendarContract.Events.DTEND, endMillis);
+        values.put(CalendarContract.Events.DTSTART, sDate);
+        values.put(CalendarContract.Events.DTEND, edDate);
         values.put(CalendarContract.Events.TITLE, mDibbit.getTitle());
         values.put(CalendarContract.Events.DESCRIPTION, mDibbit.getDescription());
         values.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().toString());
@@ -433,10 +428,9 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
 
         updateUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
         int rows = getActivity().getContentResolver().update(updateUri, values, null, null);
-        return iNumRowsUpdated;
     }
 
-    private int deleteCalendarEntry(int eventID) {
+    private void deleteCalendarEntry(int eventID) {
         int iNumRowsUpdated = 0;
         Uri deleteUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
         int rows = getActivity().getContentResolver().delete(deleteUri, null, null);
@@ -444,7 +438,6 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
             Toast.makeText(getActivity(), "Deleted from Calendar",Toast.LENGTH_SHORT ).show();
             mDibbit.setCalStatus(false);
         }
-        return iNumRowsUpdated;
     }
 
 
