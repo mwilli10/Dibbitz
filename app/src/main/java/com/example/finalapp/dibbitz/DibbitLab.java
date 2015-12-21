@@ -82,6 +82,8 @@ public class DibbitLab {
                         mDibbits.add((Dibbit) dibbit);
                         if(((Dibbit) dibbit).isPublic()){
                             ((Dibbit) dibbit).makePublic();
+                            //and change background to purple
+
                         }
                     }
                     //Collections.sort(mDibbits);

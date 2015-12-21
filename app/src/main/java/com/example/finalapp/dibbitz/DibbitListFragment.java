@@ -3,6 +3,7 @@ package com.example.finalapp.dibbitz;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -161,6 +163,7 @@ public class DibbitListFragment extends Fragment {
                 }
             });
         }
+
         updateSubtitle();
 
     }
@@ -174,6 +177,7 @@ public class DibbitListFragment extends Fragment {
         private TextView mDateTextView;
         private CheckBox mDoneCheckBox;
         private Button mShareButton;
+        private RelativeLayout mBackground;
 
 
         private int mLocation;
@@ -181,6 +185,7 @@ public class DibbitListFragment extends Fragment {
         public DibbitHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
+            mBackground = (RelativeLayout) itemView.findViewById(R.id.list_item_background);
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_dibbit_title_text_view);
             mDateTextView = (TextView) itemView.findViewById(R.id.list_item_dibbit_date_text_view);
             mDoneCheckBox = (CheckBox) itemView.findViewById(R.id.list_item_dibbit_done_check_box);
@@ -190,6 +195,9 @@ public class DibbitListFragment extends Fragment {
         public void bindDibbit(final Dibbit dibbit, final int location) {
             mDibbit = dibbit;
             mLocation = location;
+            if (dibbit.isPublic()){
+                mBackground.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.dull_light_green));
+            }
             mTitleTextView.setText(mDibbit.getTitle());
             //mDateTextView.setText(mDibbit.getDate().toString());
             mDateTextView.setText(android.text.format.DateFormat.format("EEEE, MMM dd, yyyy", mDibbit.getDate()));
@@ -199,8 +207,8 @@ public class DibbitListFragment extends Fragment {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     //Set the dibbit's done property
-                    mDibbit.setDone(isChecked,getContext());
-                   // updateUI();
+                    mDibbit.setDone(isChecked, getContext());
+                    // updateUI();
                 }
             });
 
