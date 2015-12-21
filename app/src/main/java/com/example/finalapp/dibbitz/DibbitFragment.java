@@ -32,6 +32,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Toast;
+
+import com.example.finalapp.dibbitz.model.Dibbit;
+
 import java.io.File;
 import java.util.Calendar;
 import java.util.Date;

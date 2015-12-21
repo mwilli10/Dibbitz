@@ -1,4 +1,4 @@
-package com.example.finalapp.dibbitz;
+package com.example.finalapp.dibbitz.model;
 
 import android.content.Context;
 import android.content.DialogInterface;

@@ -2,16 +2,15 @@ package com.example.finalapp.dibbitz;
 
 import android.content.Context;
 import android.os.Environment;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.Pair;
-import android.widget.ArrayAdapter;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.example.finalapp.dibbitz.model.Dibbit;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;

@@ -1,9 +1,10 @@
-package com.example.finalapp.dibbitz;
+package com.example.finalapp.dibbitz.model;
 
 /**
  * Created by KJ on 12/8/15.
  */
 
+import com.example.finalapp.dibbitz.model.Dibbit;
 import com.parse.Parse;
 import com.parse.ParseACL;
 

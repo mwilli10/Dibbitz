@@ -23,6 +23,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.finalapp.dibbitz.model.Dibbit;
 import com.parse.ParseUser;
 import java.util.List;
 
