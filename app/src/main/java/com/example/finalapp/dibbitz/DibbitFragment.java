@@ -134,6 +134,13 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
                 DatePickerFragment dialog = DatePickerFragment.newInstance(mDibbit.getDate());
                 dialog.setTargetFragment(DibbitFragment.this, REQUEST_DATE);
                 dialog.show(manager, DIALOG_DATE);
+
+                if (mDibbit.getCalStatus()) {
+                    if (mDibbit.getEventId() != 0) {
+                        updateCalendarEntry(mDibbit.getEventId());
+                    }
+                    //
+                }
             }
         });
 
@@ -164,6 +171,13 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
                 TimePickerFragment dialog = TimePickerFragment.newInstance(mDibbit.getDate());
                 dialog.setTargetFragment(DibbitFragment.this, REQUEST_TIME);
                 dialog.show(manager, DIALOG_TIME);
+
+                if (mDibbit.getCalStatus()) {
+                    if (mDibbit.getEventId() != 0) {
+                        updateCalendarEntry(mDibbit.getEventId());
+                    }
+                    //
+                }
             }
         });
 
@@ -205,10 +219,9 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
             @Override
             public void afterTextChanged(Editable s) {
                 if (mDibbit.getCalStatus()){
-                    if (mDibbit.getEventId() !=0 ){
+                    if (mDibbit.getEventId() !=0 ) {
                         updateCalendarEntry(mDibbit.getEventId());
                     }
-                    //
                 }
 
             }
@@ -245,8 +258,7 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
             public void onClick(View v) {
 
                 if (!mDibbit.getCalStatus()) {
-                    Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
-                    addEventToCalendar(getActivity(), mTitleField.getText().toString(), mDescriptionBox.getText().toString(), "Home", 20160404);
+                    addEventToCalendar(getActivity());
                     mDibbit.setCalStatus(true);
                 }else {
                     if(mDibbit.getEventId() > 0 ) {
@@ -269,7 +281,7 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
             @Override
             public void onClick(View v) {
                 if (!mDibbit.getMapStatus()) {
-                    Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Saved to Map", Toast.LENGTH_SHORT).show();
                     mDibbit.setMapStatus(true);
                     mMapSaveButton.setText(R.string.remove_from_map_label);
                 }else{
@@ -350,19 +362,18 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
 
     }
 
-    public void addEventToCalendar(Activity curActivity, String title, String description, String location, long startDate) {
+    public void addEventToCalendar(Activity curActivity) {
 
         long calID = 1;
         Calendar calDate = Calendar.getInstance();
-        long startMillis = calDate.getTimeInMillis();
         long endMillis = (calDate.getTimeInMillis() + 60 * 60 * 1000);
         long testDate = mDibbit.getDate().getTime();
 
         ContentResolver cr = getActivity().getContentResolver();
         ContentValues values = new ContentValues();
         values.put(CalendarContract.Events.EVENT_COLOR, 2);
-        values.put(CalendarContract.Events.DTSTART, startMillis);
-        values.put(CalendarContract.Events.DTEND, testDate);
+        values.put(CalendarContract.Events.DTSTART, testDate);
+        values.put(CalendarContract.Events.DTEND, endMillis);
         values.put(CalendarContract.Events.TITLE, mDibbit.getTitle());
         values.put(CalendarContract.Events.DESCRIPTION, mDibbit.getDescription());
         values.put(CalendarContract.Events.CALENDAR_ID, calID);
@@ -372,7 +383,7 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
 
 
             //DO CHECK PERMISSION
-            Toast.makeText(getActivity(), "made it", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Added to Calendar", Toast.LENGTH_SHORT).show();
 
             if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
 

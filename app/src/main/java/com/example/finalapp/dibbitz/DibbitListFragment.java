@@ -1,6 +1,8 @@
 package com.example.finalapp.dibbitz;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -216,7 +218,12 @@ public class DibbitListFragment extends Fragment {
                     // updateUI();
                 }
             });
+            if (dibbit.isPublic()){
+                mShareButton.setEnabled(false);
+                mShareButton.setClickable(false);
+                mShareButton.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.gray));
 
+            }
             mShareButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
