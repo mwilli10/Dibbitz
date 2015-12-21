@@ -40,13 +40,8 @@ public class DibbitListFragment extends Fragment {
     private Button mAddButton;
     private int mChangedPosition;
 
-
-
-
     private static final String TAG = "DibbitListFragment";
     private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
-
-    //private static final String POSITION_OF_DIBBIT = "position_of_dibbit";
 
 
     @Override
