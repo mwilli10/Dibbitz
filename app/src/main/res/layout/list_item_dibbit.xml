@@ -10,8 +10,13 @@
         android:id= "@+id/list_item_dibbit_done_check_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:paddingTop="0dp"
+        android:checked="false"
+        android:layout_alignBaseline="@+id/share_button"
+        android:layout_alignBottom="@+id/share_button"
         android:layout_alignParentRight="true"
-        android:padding="4dp"/>
+        android:layout_alignParentEnd="true"/>
 
 
 
@@ -20,6 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/list_item_dibbit_done_check_box"
+        android:layout_toStartOf="@id/list_item_dibbit_done_check_box"
         android:textStyle="bold"
         android:textSize="25sp"
         android:textColor="@android:color/holo_blue_dark"
@@ -31,24 +37,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/list_item_dibbit_done_check_box"
+        android:layout_toStartOf="@id/list_item_dibbit_done_check_box"
         android:layout_below="@id/list_item_dibbit_title_text_view"
         android:textStyle="bold"
         android:textSize="15sp"
         android:textColor="@android:color/holo_blue_dark"
         android:padding="4dp"
         android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
         tools:text="Dibbit Date"/>
 
-    <Button
+    <ImageButton
         android:background="@android:color/holo_blue_light"
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:text="Share"
-        android:textColor="@android:color/black"
+        android:layout_height="50dp"
         android:id="@+id/share_button"
-        android:layout_below="@+id/list_item_dibbit_done_check_box"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_alignBottom="@+id/list_item_dibbit_date_text_view"
+        android:layout_toLeftOf="@+id/list_item_dibbit_done_check_box"
+        android:layout_toStartOf="@+id/list_item_dibbit_done_check_box"
+        android:src="@mipmap/share_image"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/list_item_dibbit_done_check_box"
+        android:textStyle="bold"
+        android:padding="4dp"
+        android:paddingBottom="0dp"
+        android:layout_alignParentEnd="true"
+        android:text="Done?"/>
+
 
 
 </RelativeLayout>

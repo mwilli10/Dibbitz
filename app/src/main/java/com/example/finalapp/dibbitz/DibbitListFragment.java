@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -176,7 +177,7 @@ public class DibbitListFragment extends Fragment {
         private TextView mTitleTextView;
         private TextView mDateTextView;
         private CheckBox mDoneCheckBox;
-        private Button mShareButton;
+        private ImageButton mShareButton;
         private RelativeLayout mBackground;
 
 
@@ -189,7 +190,7 @@ public class DibbitListFragment extends Fragment {
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_dibbit_title_text_view);
             mDateTextView = (TextView) itemView.findViewById(R.id.list_item_dibbit_date_text_view);
             mDoneCheckBox = (CheckBox) itemView.findViewById(R.id.list_item_dibbit_done_check_box);
-            mShareButton = (Button) itemView.findViewById(R.id.share_button);
+            mShareButton = (ImageButton) itemView.findViewById(R.id.share_button);
         }
 
         public void bindDibbit(final Dibbit dibbit, final int location) {
