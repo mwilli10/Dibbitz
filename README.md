@@ -8,4 +8,4 @@ Deep Thank you to the following entities for help in building this project
 
 Stack Overflow 
 Google Inc. 
-Tommi Virtanen Big Nerd Ranch, LLC
+Big Nerd Ranch, LLC
