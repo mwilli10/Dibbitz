@@ -66,25 +66,6 @@ public class MapActivity extends Fragment {
         googleMap = mMapView.getMap();
 
 
-        // latitude and longitude
-//        double latitude = 17.385044;
-//        double longitude = 78.486671;
-//        String location = "1600 Amphitheatre Parkway, Mountain View, CA";
-
-//        // create marker
-//        MarkerOptions marker = new MarkerOptions().position(
-//                new LatLng(latitude, longitude)).title("Hello Maps");
-//
-//        // Changing marker icon
-//        marker.icon(BitmapDescriptorFactory
-//                .defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
-//
-//        // adding marker
-//        googleMap.addMarker(marker);
-//        CameraPosition cameraPosition = new CameraPosition.Builder()
-//                .target(new LatLng(17.385044, 78.486671)).zoom(12).build();
-//        googleMap.animateCamera(CameraUpdateFactory
-//                .newCameraPosition(cameraPosition));
         String location ="";
         List<Pair<String, String>> locations = dibbitLab.get(getContext()).getLocations();
         if (locations.size()>0) {
