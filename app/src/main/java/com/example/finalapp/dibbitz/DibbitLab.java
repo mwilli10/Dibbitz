@@ -54,10 +54,17 @@ public class DibbitLab {
     }
 
     public void updateDibbits() {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Dibbit");
+        ParseQuery<ParseObject> query1 = ParseQuery.getQuery("Dibbit");
+        query1.whereEqualTo("mUser", ParseUser.getCurrentUser());
 
-        // Restrict to cases where the author is the current user.
-        query.whereEqualTo("mUser", ParseUser.getCurrentUser());
+        ParseQuery<ParseObject> query2 = ParseQuery.getQuery("Dibbit");
+        query2.whereEqualTo("mIsPublic",true);
+
+        List<ParseQuery<ParseObject>> queries = new ArrayList<ParseQuery<ParseObject>>();
+        queries.add(query1);
+        queries.add(query2);
+
+        ParseQuery<ParseObject> query = ParseQuery.or(queries);
 
         // Run the query
         query.findInBackground(new FindCallback<ParseObject>() {

@@ -125,7 +125,7 @@ public class DibbitFragment extends Fragment implements ActivityCompat.OnRequest
         });
 
         mDateButton = (Button) v.findViewById(R.id.dibbit_date);
-        System.out.println("B: " + android.text.format.DateFormat.format("EEEE, MMM dd, yyyy", mDate));
+
         updateDate();
         mDateButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -92,9 +92,9 @@ public class DibbitListFragment extends Fragment {
         inflater.inflate(R.menu.fragment_dibbit_list, menu);
         MenuItem subtitleItem = menu.findItem(R.id.menu_item_show_subtitle);
         if (mSubtitleVisible) {
-            subtitleItem.setTitle(R.string.hide_subtitle);
+            subtitleItem.setTitle(R.string.hide_count);
         } else {
-            subtitleItem.setTitle(R.string.show_subtitle);
+            subtitleItem.setTitle(R.string.show_count);
         }
     }
 

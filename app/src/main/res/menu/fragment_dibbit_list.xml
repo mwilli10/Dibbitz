@@ -9,7 +9,7 @@
         app:showAsAction="ifRoom|withText" />
     <item
         android:id="@+id/menu_item_show_subtitle"
-        android:title="@string/show_subtitle"
+        android:title="@string/show_count"
         app:showAsAction="ifRoom"/>
 
     <item

@@ -132,6 +132,9 @@ public class Dibbit extends ParseObject implements Comparable<Dibbit> {
     }
 
     public Date getDate() {
+        if (getDate("mDate") == null){
+            put ("mDate", new Date());
+        }
         return getDate("mDate");
     }
 

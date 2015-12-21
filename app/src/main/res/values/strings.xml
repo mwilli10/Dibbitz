@@ -19,8 +19,8 @@
     <string name="dialog_editTime">Time</string>
     <string name="dialog_editDateOrTime">Do you want to edit the date or time?</string>
     <string name="new_dibbit">New Dibbit</string>
-    <string name="show_subtitle">Show Subtitle</string>
-    <string name="hide_subtitle">Hide Subtitle</string>
+    <string name="show_count">Show Count</string>
+    <string name="hide_count">Hide Count</string>
     <string name="subtitle_format">%1$s dibbits</string>
     <string name="delete_dibbit">Delete Dibbit</string>
     <string name="empty_dibbit_list_label"> No Dibbits Here</string>
